@@ -1,4 +1,5 @@
 clear; close all, format compact
+%% Apartado 3
 %% Modulación sin ruido
 NFFT  =	512;  % Tamaño de la FFT
 Fs    =	 250000;  % Frecuencia de muestreo
