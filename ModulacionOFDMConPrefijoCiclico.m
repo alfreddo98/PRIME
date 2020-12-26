@@ -1,4 +1,4 @@
-function [tx_bits, signal] = ModulacionOFDMScrambler(M, Nf, NFFT, Nofdm)
+function [tx_bits, signal] = ModulacionOFDMConPrefijoCiclico(M, Nf, NFFT, Nofdm)
     % Bits que vamos a transmitir:
     tx_bits = Nofdm*log2(M)*Nf;
     tx_bits = round(rand(tx_bits,1));
@@ -9,5 +9,6 @@ function [tx_bits, signal] = ModulacionOFDMScrambler(M, Nf, NFFT, Nofdm)
     % Modulación:
     mod_DMPSK = DMPSK_Modulador(tx_bits_aleatorios, M, piloto_fase);
     signal=OFDM_Modulador(mod_DMPSK,piloto_fase,NFFT,Nofdm);
-    signal = signal(:)';
+    signal = addPrefijoCiclico(signal)
 end
+

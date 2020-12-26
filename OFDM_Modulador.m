@@ -8,6 +8,5 @@ function x = OFDM_Modulador(mod_DMPSK,piloto_fase,NFFT,Nofdm)
     X(332:427,:) = flipud(conj(X(88:183,:)));
 
     x = ifft(X,NFFT,'symmetric')*NFFT;
-    x = x(:)';
 end
 

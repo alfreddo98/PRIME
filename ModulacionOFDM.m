@@ -8,5 +8,6 @@ function [tx_bits, signal] = ModulacionOFDM(M, Nf, NFFT, Nofdm)
     % Modulación:
     mod_DMPSK = DMPSK_Modulador(tx_bits, M, piloto_fase);
     signal=OFDM_Modulador(mod_DMPSK,piloto_fase,NFFT,Nofdm);
+    signal = signal(:)';
 end
 
