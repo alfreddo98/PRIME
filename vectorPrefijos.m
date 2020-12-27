@@ -1,4 +1,10 @@
 function [pref_fase, pref] = vectorPrefijos(Nsimbolos)
+% Función: Función que dado el número de símbolos que se enviarán,
+% devolverá el vector que se usará de pilotos, ya dividido en fase y
+% módulo.
+% Input: Nsimbolos= Número de símbolos que se usarán, siempre será Nofdm.
+% Output: pref_fase= Los pilotos ya en fase (ángulos). pref= Los pilotos en
+% módulo.
 pref = [0 0 0 0 1 1 1 0 1 1 1 1 0 0 1 0 1 1, ...
         0 0 1 0 0 1 0 0 0 0 0 0 1 0 0 0 1 0 0, ...
         1 1 0 0 0 1 0 1 1 1 0 1 0 1 1 0 1 1 0, ...

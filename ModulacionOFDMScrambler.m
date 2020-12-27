@@ -1,4 +1,5 @@
 function [tx_bits, signal] = ModulacionOFDMScrambler(M, Nf, NFFT, Nofdm)
+
     % Bits que vamos a transmitir:
     tx_bits = Nofdm*log2(M)*Nf;
     tx_bits = round(rand(tx_bits,1));

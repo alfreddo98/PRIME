@@ -1,5 +1,11 @@
 function [txbits_aleatorizados] = Scrambler(tx_bits)
-%%
+% Función: Función que convierte el vector de bits que entra, en un vector
+% aleatorizado aplicando un xor entre los bits y un vector estipulado en el
+% standard.
+% Input: Vector de bits que se desea aleatorizar o dealeatorizar.
+% Output: Vector de bits dealeatorizado o aleatorizado, según lo que
+% corresponda.
+
 % Vector de aleatorización que vamos a usar que viene especificado en la
 % documentación prime.
      pref = [0 0 0 0 1 1 1 0 1 1 1 1 0 0 1 0 1 1, ...

@@ -146,4 +146,5 @@ semilogy(SNR_vector, theoryBerD8PSK,     '-kx');
 legend('Simulado DBPSK','Teórico DBPSK', 'Simulado DQPSK', 'Teorico DQPSK', 'Simulado D8PSK', 'Teorico D8PSK')
 xlabel('SNR (dB)');  ylabel('BER de DMPSK')
 grid on
-title('Resultados del sistema OFDM de DBPSK DQPSK y D8PSK con FEC')
+title('Resultados del sistema OFDM de DBPSK DQPSK y D8PSK con FEC')ç
+N_bits_totales = 
