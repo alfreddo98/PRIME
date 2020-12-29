@@ -18,7 +18,6 @@ function [tx_bits, signal] = ModulacionOFDM(M, Nf, NFFT, Nofdm)
     [piloto_fase, piloto_mod]=vectorPrefijos(Nofdm);
 % Modulación DMPSK:
     mod_DMPSK = DMPSK_Modulador(tx_bits, M, piloto_fase);
-    size(mod_DMPSK)
 % Modulación OFDM:
     signal=OFDM_Modulador(mod_DMPSK,piloto_fase,NFFT,Nofdm);
 % Se devuelve como un vector:

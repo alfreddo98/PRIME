@@ -1,0 +1,1158 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Pr&aacute;ctica PRIME</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-12-29"><meta name="DC.source" content="PRIME.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Pr&aacute;ctica PRIME</h1><!--introduction--><p>Autores: Alfredo S&aacute;nchez S&aacute;nchez y Manuel Mora de amarillas.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#2">Apartado 1: Implementaci&oacute;n de todos los modos de comunicaci&oacute;n de PRIME en el caso de canal sin distorsi&oacute;n y sin FEC</a></li><li><a href="#3">Apartado 1.1: Elecci&oacute;n de par&aacute;metros de simulaci&oacute;n</a></li><li><a href="#6">Apartado 1.2.1: Demostrar que en ausencia de ruido sin FEC, sin prefijo c&iacute;clico y sin aleatorizaci&oacute;n, no se gener&aacute; errores.</a></li><li><a href="#8">Apartado 1.2.2: Demostrar que en ausencia de ruido sin FEC, sin prefijo c&iacute;clico y con aleatorizaci&oacute;n, no se gener&aacute; errores.</a></li><li><a href="#10">Apartado 1.2.3: Curvas BER vs SNR te&oacute;ricas y simuladas, estas ultimas empleando secuencias de bits seudoaleatorias.</a></li><li><a href="#14">Apartado 2: Implementaci&oacute;n de todos los modos de comunicaci&oacute;n de PRIME en el caso de canal sin distorsi&oacute;n y sin FEC.</a></li><li><a href="#15">Apartado 2.1: Se&ntilde;al inyectada</a></li><li><a href="#16">Apartado 2.2: Representaci&oacute;n gr&aacute;fica del canal</a></li><li><a href="#18">Apartado 2.3: Curvas BER vs SNR te&oacute;ricas y simuladas, a&ntilde;adiendo el efecto del canal sin prefijo c&iacute;clico ni ecualizador.</a></li><li><a href="#22">Apartado 2.4: Curvas BER vs SNR Te&oacute;rica con canal, prefijo c&iacute;clico y ecualizador</a></li><li><a href="#24">Apartado 3: Implementaci&oacute;n de todos los modos de comunicaci&oacute;n de PRIME con FEC</a></li><li><a href="#25">Apartado 3.1:  Modificaci&oacute;n de par&aacute;metros.</a></li><li><a href="#28">Apartado 3.2.1: Cadena con entrelazado en ausencia de ruido.</a></li><li><a href="#30">Apartado 3.2.2: Cadena con entrelazado y FEC en ausencia de ruido.</a></li><li><a href="#32">Apartado 3.2.3: Curvas BER vs SNR</a></li><li><a href="#35">Canal con ecualizaci&oacute;n:</a></li></ul></div><p>El proyecto consiste en realizar un modelado de la simulaci&oacute;n de la transmisi&oacute;n de tramas de Carga (Payload) seg&uacute;n el est&aacute;ndar de PRIME,  ITU-T G.9904. No se tendr&aacute; en cuenta la parte de la trama destinada a la transmisi&oacute;n del pre&aacute;mbulo (Preamble), Encabezado (Header) ni del CRC.</p><h2 id="2">Apartado 1: Implementaci&oacute;n de todos los modos de comunicaci&oacute;n de PRIME en el caso de canal sin distorsi&oacute;n y sin FEC</h2><h2 id="3">Apartado 1.1: Elecci&oacute;n de par&aacute;metros de simulaci&oacute;n</h2><p>Los bits a transmitir, deben ser superiores a 10^4 o 10000 pues queremos una simulaci&oacute;n fiable de BER de 10^-4. En nuestro caso, hemos seleccionado como l&iacute;mite 20000, que es un valor fiable para todos los tipos de modulaci&oacute;n, especialmente paa la modulaci&oacute;n de 2, que es la que enviar&iacute;a un menor n&uacute;mero de bits. El n&uacute;mero de tramas que enviaremos ser&aacute; 4, sabiendo que con DBPSK el n&uacute;mero de s&iacute;mbolos a transmitir es el doble que en DQPSK y este es el doble que con D8PSK. El motivo por el que queremos enviar un n&uacute;mero elevados de bits es que queremos hacer que la simulaci&oacute;n, se asemeje m&aacute;s a los c&aacute;lculos te&oacute;ricos, pu&eacute;s cuantos m&aacute;s bits se env&iacute;en, el factor aleatorio va desapareciendo.</p><p>El n&uacute;mero de s&iacute;mbolos de OFDM por trama ser&aacute; 63, que es el m&aacute;ximo que permite el standard PRIME en sus especificaciones para que la transmisi&oacute;n sea lo m&aacute;s r&aacute;pida posible.</p><p>Para terminar, el n&uacute;mero de portadoras por simbolo OFDM ser&aacute; de 96, este dato es el que viene dado por el standard y significa que por cada s&iacute;mbolo OFDM van 96 s&iacute;mbolos modulados en DBPSK, DQPSK o D8PSK.</p><pre class="codeinput">clear; close <span class="string">all</span>, format <span class="string">compact</span>
+NFFT  =	512;  <span class="comment">% Tama&ntilde;o de la FFT</span>
+Fs    =	 25600;  <span class="comment">% Frecuencia de muestreo</span>
+df    =  Fs/NFFT ;  <span class="comment">% Separaci&oacute;n entre portadoras</span>
+Nf    =	96;  <span class="comment">% Numero de portadoras con datos (+1 por el piloto)</span>
+N_tramas = 4;
+Nofdm = 63; <span class="comment">% N&uacute;mero de s&iacute;mbolos OFDM por trama</span>
+<span class="comment">% El n&uacute;mero de bits totales ser&aacute;: N_bits_totales =</span>
+<span class="comment">% Nf*Nofdm*log2(M)*N_tramas, donde M ser&aacute; 2, 4, 8 dependiendo del tipo de</span>
+<span class="comment">% modulaci&oacute;n.</span>
+</pre><h2 id="6">Apartado 1.2.1: Demostrar que en ausencia de ruido sin FEC, sin prefijo c&iacute;clico y sin aleatorizaci&oacute;n, no se gener&aacute; errores.</h2><pre class="codeinput">NFFT  =	512;  <span class="comment">% Tama&ntilde;o de la FFT</span>
+Fs    =	 256000;  <span class="comment">% Frecuencia de muestreo</span>
+df    =  Fs/NFFT ;  <span class="comment">% Separaci&oacute;n entre portadoras</span>
+Nf    =	96;  <span class="comment">% Numero de portadoras con datos (+1 por el piloto)</span>
+N_tramas = 10;
+Nofdm = 63; <span class="comment">% N&uacute;mero de s&iacute;mbolos OFDM por trama</span>
+BERDBPSK_Total = [];
+BERDQPSK_Total = [];
+BERD8PSK_Total = [];
+
+<span class="keyword">for</span> i = 1:N_tramas
+    [txbitsDBPSK,xDBPSK] = ModulacionOFDM(2, Nf, NFFT, Nofdm);
+    [txbitsDQPSK,xDQPSK] = ModulacionOFDM(4, Nf, NFFT, Nofdm);
+    [txbitsD8PSK,xD8PSK] = ModulacionOFDM(8, Nf, NFFT, Nofdm);
+    <span class="comment">% Demodulacion sin ruido</span>
+    BERDBPSK=CalcularError(xDBPSK, Nf, NFFT, 2 ,Nofdm, txbitsDBPSK);
+    BERDQPSK=CalcularError(xDQPSK, Nf, NFFT, 4 ,Nofdm, txbitsDQPSK);
+    BERD8PSK=CalcularError(xD8PSK, Nf, NFFT, 8 ,Nofdm, txbitsD8PSK);
+    BERDBPSK_Total = [BERDBPSK_Total BERDBPSK];
+    BERDQPSK_Total = [BERDQPSK_Total BERDQPSK];
+    BERD8PSK_Total = [BERD8PSK_Total BERD8PSK];
+
+<span class="keyword">end</span>
+BERDBPSK_Total = sum(BERDBPSK_Total)
+BERDQPSK_Total = sum(BERDQPSK_Total)
+BERD8PSK_Total = sum(BERD8PSK_Total)
+</pre><pre class="codeoutput">BERDBPSK_Total =
+     0
+BERDQPSK_Total =
+     0
+BERD8PSK_Total =
+     0
+</pre><p>Efectivamente, anteriormente se muestra que el error es nulo y tiene todo el sentido, puesto que no se introduce ning&uacute;n tipo de distorsi&oacute;n ni ruido en ning&uacute;n punto entre la se&ntilde;al transmitida y la recibida. Todos los bloques simulados funcionan correctamente y por tanto, no a&ntilde;aden ning&uacute;n error, pu&eacute;s los bloques en s&iacute; no a&ntilde;aden error.</p><h2 id="8">Apartado 1.2.2: Demostrar que en ausencia de ruido sin FEC, sin prefijo c&iacute;clico y con aleatorizaci&oacute;n, no se gener&aacute; errores.</h2><p>En este apartado, se a&ntilde;adir&aacute; la parte de Aleatorizaci&oacute;n y Dealeatorizaci&oacute;n, con una funci&oacute;n Scrambler.</p><pre class="codeinput"><span class="comment">% Ruido para el apartado 1.2.3:</span>
+BERDBPSK_Total_Scrambler = [];
+BERDQPSK_Total_Scrambler = [];
+BERD8PSK_Total_Scrambler = [];
+SNR_vector = 0:20;
+<span class="keyword">for</span> i = 1:N_tramas
+    [txbitsDBPSK,xDBPSK] = ModulacionOFDMScrambler(2, Nf, NFFT, Nofdm);
+    [txbitsDQPSK,xDQPSK] = ModulacionOFDMScrambler(4, Nf, NFFT, Nofdm);
+    [txbitsD8PSK,xD8PSK] = ModulacionOFDMScrambler(8, Nf, NFFT, Nofdm);
+    <span class="comment">% Demodulacion con Scrambler</span>
+    BERDBPSKScrambler=CalcularErrorScrambler(xDBPSK, Nf, NFFT, 2 ,Nofdm, txbitsDBPSK);
+    BERDQPSKScrambler=CalcularErrorScrambler(xDQPSK, Nf, NFFT, 4 ,Nofdm, txbitsDQPSK);
+    BERD8PSKScrambler=CalcularErrorScrambler(xD8PSK, Nf, NFFT, 8 ,Nofdm, txbitsD8PSK);
+    BERDBPSK_Total_Scrambler = [BERDBPSK_Total_Scrambler BERDBPSKScrambler];
+    BERDQPSK_Total_Scrambler = [BERDQPSK_Total_Scrambler BERDQPSKScrambler];
+    BERD8PSK_Total_Scrambler = [BERD8PSK_Total_Scrambler BERD8PSKScrambler];
+<span class="keyword">end</span>
+BERDBPSK_Total_Scrambler = sum(BERDBPSK_Total_Scrambler)
+BERDQPSK_Total_Scrambler = sum(BERDQPSK_Total_Scrambler)
+BERD8PSK_Total_Scrambler = sum(BERD8PSK_Total_Scrambler)
+</pre><pre class="codeoutput">BERDBPSK_Total_Scrambler =
+     0
+BERDQPSK_Total_Scrambler =
+     0
+BERD8PSK_Total_Scrambler =
+     0
+</pre><p>Como ocurre en el apartado anterior, el BER es 0, pu&eacute;s como en el caso anterior, no se introduc&iacute;a ning&uacute;n error, en este caso y solo al a&ntilde;adir la aleatorizaci&oacute;n que tampoco introduce ni distorsi&oacute;n, ni errores, ni ruido, al compararar los bits transmitidos y los recibidos, el BER sale 0.</p><h2 id="10">Apartado 1.2.3: Curvas BER vs SNR te&oacute;ricas y simuladas, estas ultimas empleando secuencias de bits seudoaleatorias.</h2><p>En este apartado, para ver como responde el sistema a interferencia de ruido blanco, se a&ntilde;ade dicho ruido a la se&ntilde;al antes de ser introducida en el receptor. Se representar&aacute; la final el error obtenido para distintos valores de SNR.</p><pre class="codeinput"><span class="keyword">for</span> i = 1:N_tramas
+    <span class="comment">% Inicializaci&oacute;n de vectores:</span>
+    BER_DBPSK=zeros(N_tramas,length(SNR_vector));
+    BER_DQPSK=zeros(N_tramas,length(SNR_vector));
+    BER_D8PSK=zeros(N_tramas,length(SNR_vector));
+    <span class="comment">% Se a&ntilde;ase ruido:</span>
+    BERDBPSKR=CalcularErrorRuido(xDBPSK, Nf, NFFT, 2 ,Nofdm, txbitsDBPSK, SNR_vector);
+    BERDQPSKR=CalcularErrorRuido(xDQPSK, Nf, NFFT, 4 ,Nofdm, txbitsDQPSK, SNR_vector);
+    BERD8PSKR=CalcularErrorRuido(xD8PSK, Nf, NFFT, 8 ,Nofdm, txbitsD8PSK, SNR_vector);
+    BERDBPSKRuido(i,:) = BERDBPSKR;
+    BERDQPSKRuido(i,:) = BERDQPSKR;
+    BERD8PSKRuido(i,:) = BERD8PSKR;
+<span class="keyword">end</span>
+BERDBPSKRuido_avg = zeros(1,length(SNR_vector));
+BERDQPSKRuido_avg = zeros(1,length(SNR_vector));
+BERD8PSKRuido_avg = zeros(1,length(SNR_vector));
+
+<span class="keyword">for</span> i=1:N_tramas
+      BERDBPSKRuido_avg = BERDBPSKRuido_avg + BERDBPSKRuido(i,:);
+      BERDQPSKRuido_avg = BERDQPSKRuido_avg + BERDQPSKRuido(i,:);
+      BERD8PSKRuido_avg = BERD8PSKRuido_avg + BERD8PSKRuido(i,:);
+<span class="keyword">end</span>
+BERDBPSKRuido_avg = BERDBPSKRuido_avg./N_tramas;
+BERDQPSKRuido_avg = BERDQPSKRuido_avg./N_tramas;
+BERD8PSKRuido_avg = BERD8PSKRuido_avg./N_tramas;
+
+theoryBerDBPSK = DBPSK_BER(SNR_vector);
+theoryBerDQPSK = DQPSK_BER(SNR_vector);
+theoryBerD8PSK = D8PSK_BER(SNR_vector);
+
+theoryBerDBPSK(find(theoryBerDBPSK&lt;1e-5)) = NaN;
+theoryBerDQPSK(find(theoryBerDQPSK&lt;1e-5)) = NaN;
+theoryBerD8PSK(find(theoryBerD8PSK&lt;1e-5)) = NaN;
+
+figure
+
+semilogy(SNR_vector, BERDBPSKRuido_avg, <span class="string">'-*'</span>);  hold <span class="string">on</span>
+semilogy(SNR_vector, theoryBerDBPSK);
+semilogy(SNR_vector, BERDQPSKRuido_avg, <span class="string">'-x'</span>);
+semilogy(SNR_vector, theoryBerDQPSK);
+semilogy(SNR_vector, BERD8PSKRuido_avg, <span class="string">'-o'</span>);
+semilogy(SNR_vector, theoryBerD8PSK);
+
+legend(<span class="string">'Simulado DBPSK'</span>,<span class="string">'Te&oacute;rico DBPSK'</span>, <span class="string">'Simulado DQPSK'</span>, <span class="string">'Teorico DQPSK'</span>, <span class="string">'Simulado D8PSK'</span>, <span class="string">'Teorico D8PSK'</span>)
+xlabel(<span class="string">'SNR (dB)'</span>);  ylabel(<span class="string">'BER de DMPSK'</span>)
+grid <span class="string">on</span>
+title(<span class="string">'Resultados del sistema OFDM de DBPSK DQPSK y D8PSK sin FEC'</span>)
+</pre><img vspace="5" hspace="5" src="PRIME_01.png" alt=""> <p>El sistema PRIME implementado hasta este momento tiene un comportamiento frente al ruido parecido al de la pr&aacute;ctica 4 de OFDM, pues no se ha a&ntilde;adido ning&uacute;n bloque de correci&oacute;n de errores.</p><p>Al representar las curvas de BER te&oacute;ricas frente a las curvas de BER simuladas, se observa como ambas son pr&aacute;cticamente id&eacute;nticas (menos en el caso de D8PSK que la pr&aacute;ctica sale algo desplezada. Este es el resultado esperado, pues en ausencia de FEC, el error cometido para un determinado ruido blanco es igual con PRIME a una modulaci&oacute;n OFDM normal y corriente.</p><p>Como ya se ha observado en otras pr&aacute;cticas, para un valor de BER se necesita mayor SNR para las modulaciones que utilizan mayor n&uacute;mero de s&iacute;mbolos (D8PSK), pues la separaci&oacute;n entre ellos es menor. Para la modulaci&oacute;n DBPSK tanto la te&oacute;rica como la pr&aacute;ctica alcanzan un BER de 10^-4 para una SNR=10dB aproximadamente. Con la modulaci&oacute;n DQPSK se alcanza en los 14dB (el 5 dB m&aacute;s pr&aacute;cticamente). Para D8PSK se aumenta la SNR se necesitan aproximadamente 20dB para alcanzarlos (el aumento es pr&aacute;cticamente el mismo que el aumento anterior)</p><pre class="codeinput">clear <span class="string">all</span>;
+</pre><h2 id="14">Apartado 2: Implementaci&oacute;n de todos los modos de comunicaci&oacute;n de PRIME en el caso de canal sin distorsi&oacute;n y sin FEC.</h2><p>As&iacute; como en las implementaciones anteriores se ha supuesto un canal invariante en frecuencia, en este apartado se asumir&aacute; que el canal cambia con la frecuencia y que se producen retardos.</p><h2 id="15">Apartado 2.1: Se&ntilde;al inyectada</h2><h2 id="16">Apartado 2.2: Representaci&oacute;n gr&aacute;fica del canal</h2><p>Hay que cambiar a como nos piden en el enunciado que no lo entiendo bien.</p><pre class="codeinput">h=[-0.1,0.3,-0.5,0.7,-0.9,0.7,-0.5,0.3,-0.1];
+H = fft(h,length(h));
+figure;
+plot(abs(fftshift(H)));
+title(<span class="string">'Transformada de Fourier discreta de la respuesta del canal, H(k)'</span>)
+xlabel(<span class="string">'k'</span>)
+ylabel(<span class="string">'Amplitud o valor'</span>)
+</pre><img vspace="5" hspace="5" src="PRIME_02.png" alt=""> <p>El canal, como se puede apreciar actua como un filtro que atenua las bandas laterales y amplifica las bandas de los extremos.</p><h2 id="18">Apartado 2.3: Curvas BER vs SNR te&oacute;ricas y simuladas, a&ntilde;adiendo el efecto del canal sin prefijo c&iacute;clico ni ecualizador.</h2><pre class="codeinput">NFFT  =	512;  <span class="comment">% Tama&ntilde;o de la FFT</span>
+Fs    =	 250000;  <span class="comment">% Frecuencia de muestreo</span>
+df    =  Fs/NFFT ;  <span class="comment">% Separaci&oacute;n entre portadoras</span>
+Nf    =	96;  <span class="comment">% Numero de portadoras con datos (+1 por el piloto)</span>
+N_tramas = 20;
+Nofdm = 63; <span class="comment">% N&uacute;mero de s&iacute;mbolos OFDM por trama</span>
+SNR_vector = 0:20;
+<span class="keyword">for</span> i=1:N_tramas
+    BER_DBPSK=zeros(N_tramas,length(SNR_vector));
+    BER_DQPSK=zeros(N_tramas,length(SNR_vector));
+    BER_D8PSK=zeros(N_tramas,length(SNR_vector));
+
+    [txbitsDBPSK,xDBPSK] = ModulacionOFDMScrambler(2, Nf, NFFT, Nofdm);
+    [txbitsDQPSK,xDQPSK] = ModulacionOFDMScrambler(4, Nf, NFFT, Nofdm);
+    [txbitsD8PSK,xD8PSK] = ModulacionOFDMScrambler(8, Nf, NFFT, Nofdm);
+    <span class="comment">% Se a&ntilde;ase ruido:</span>
+     BERDBPSK=CalcularErrorRuidoCanal(xDBPSK, Nf, NFFT, 2 ,Nofdm, txbitsDBPSK, SNR_vector, h);
+     BERDQPSK=CalcularErrorRuidoCanal(xDQPSK, Nf, NFFT, 4 ,Nofdm, txbitsDQPSK, SNR_vector, h);
+     BERD8PSK=CalcularErrorRuidoCanal(xD8PSK, Nf, NFFT, 8 ,Nofdm, txbitsD8PSK, SNR_vector, h);
+     BERDBPSKRuido(i,:) = BERDBPSK;
+     BERDQPSKRuido(i,:) = BERDQPSK;
+     BERD8PSKRuido(i,:) = BERD8PSK;
+<span class="keyword">end</span>
+BERDBPSKRuido_avg = zeros(1,length(SNR_vector));
+BERDQPSKRuido_avg = zeros(1,length(SNR_vector));
+BERD8PSKRuido_avg = zeros(1,length(SNR_vector));
+
+<span class="keyword">for</span> i=1:N_tramas
+      BERDBPSKRuido_avg = BERDBPSKRuido_avg + BERDBPSKRuido(i,:);
+      BERDQPSKRuido_avg = BERDQPSKRuido_avg + BERDQPSKRuido(i,:);
+      BERD8PSKRuido_avg = BERD8PSKRuido_avg + BERD8PSKRuido(i,:);
+<span class="keyword">end</span>
+BERDBPSKRuido_avg = BERDBPSKRuido_avg./N_tramas;
+BERDQPSKRuido_avg = BERDQPSKRuido_avg./N_tramas;
+BERD8PSKRuido_avg = BERD8PSKRuido_avg./N_tramas;
+
+theoryBerDBPSK = DBPSK_BER(SNR_vector);
+theoryBerDQPSK = DQPSK_BER(SNR_vector);
+theoryBerD8PSK = D8PSK_BER(SNR_vector);
+
+theoryBerDBPSK(find(theoryBerDBPSK&lt;1e-5)) = NaN;
+theoryBerDQPSK(find(theoryBerDQPSK&lt;1e-5)) = NaN;
+theoryBerD8PSK(find(theoryBerD8PSK&lt;1e-5)) = NaN;
+
+figure
+
+semilogy(SNR_vector, BERDBPSKRuido_avg, <span class="string">'-o'</span>);  hold <span class="string">on</span>
+semilogy(SNR_vector, theoryBerDBPSK,     <span class="string">'-kx'</span>);
+semilogy(SNR_vector, BERDQPSKRuido_avg, <span class="string">'-o'</span>);
+semilogy(SNR_vector, theoryBerDQPSK,     <span class="string">'-kx'</span>);
+semilogy(SNR_vector, BERD8PSKRuido_avg, <span class="string">'-o'</span>);
+semilogy(SNR_vector, theoryBerD8PSK,     <span class="string">'-kx'</span>);
+
+legend(<span class="string">'Simulado DBPSK'</span>,<span class="string">'Te&oacute;rico DBPSK'</span>, <span class="string">'Simulado DQPSK'</span>, <span class="string">'Teorico DQPSK'</span>, <span class="string">'Simulado D8PSK'</span>, <span class="string">'Teorico D8PSK'</span>)
+xlabel(<span class="string">'SNR (dB)'</span>);  ylabel(<span class="string">'BER de DMPSK'</span>)
+grid <span class="string">on</span>
+title(<span class="string">'Resultados del sistema OFDM de DBPSK DQPSK y D8PSK sin FEC con canal sin prefijo c&iacute;clico'</span>)
+title(<span class="string">'BER vs SNR  sin FEC con canal sin prefijo c&iacute;clico ni ecualizador'</span>)
+</pre><img vspace="5" hspace="5" src="PRIME_03.png" alt=""> <p>Como se pod&iacute;a esperar, cuando se introducen interferencias y retardos en el canal, los errores aumentan. Es curioso que a partir de un umbral de SNR, por mucho que se aumente el porcentaje de errores, se queda estancado ah&iacute;.</p><p>Dependiendo del tipo de modulaci&oacute;n, el umbral var&iacute;a, para DQPSK, el umbral se encuentra en aproximadamente 19 dB y el BER se estanca en 0.03745 y no se consigue una BER menor a 0.9% a partir de ese umbral. Para DQPSK, ocurre lo mismo, se empieza a estancar el BER en 19 dB con un BER de 0.01108 aproximadamente y no se consigue una BER menor a 2 % a partir de dicho umbral. Para D8PSK, ocurre lo mismo, se empieza a estancar el BER en 19 dB con un BER de 0.007068 aproximadamente y no se consigue una BER menor a 5 % a partir de dicho umbral.</p><p>El valor de SNR coincide en todas las modulaciones, el error obtenido varia debido a la separaci&oacute;n entre s&iacute;mbolos de cada una.</p><h2 id="22">Apartado 2.4: Curvas BER vs SNR Te&oacute;rica con canal, prefijo c&iacute;clico y ecualizador</h2><p>En este introduciremos el prefijo c&iacute;clicoy, en el receptor, depu&eacute;s del demodulador un ecualizador. Se emplear&aacute; como piloto el primer s&iacute;mbolo OFDM, se asumir&aacute; que el receptor conoce las amplitudes complejas de las portadoras del primer s&iacute;mbolo OFDM antes de inyectar la se&ntilde;al en l&iacute;nea. Con estos a&ntilde;adidos, se calcular&aacute; y se representar&aacute; las nuevas curvas de</p><pre class="codeinput"><span class="keyword">for</span> i=1:N_tramas
+    BER_DBPSK=zeros(N_tramas,length(SNR_vector));
+    BER_DQPSK=zeros(N_tramas,length(SNR_vector));
+    BER_D8PSK=zeros(N_tramas,length(SNR_vector));
+
+    [txbitsDBPSK,xDBPSK, pilotoDBPSK] = ModulacionOFDMEcualizacion(2, Nf, NFFT, Nofdm);
+    [txbitsDQPSK,xDQPSK, pilotoDQPSK] = ModulacionOFDMEcualizacion(4, Nf, NFFT, Nofdm);
+    [txbitsD8PSK,xD8PSK, pilotoD8PSK] = ModulacionOFDMEcualizacion(8, Nf, NFFT, Nofdm);
+    <span class="comment">% Demodulacion con Ecualizador Zero Forcing</span>
+     BERDBPSK_Ecualizador=CalcularErrorRuidoCanalEcualizado(xDBPSK, Nf, NFFT, 2 ,Nofdm, txbitsDBPSK, SNR_vector, h, pilotoDBPSK);
+     BERDQPSK_Ecualizador=CalcularErrorRuidoCanalEcualizado(xDQPSK, Nf, NFFT, 4 ,Nofdm, txbitsDQPSK, SNR_vector, h, pilotoDQPSK);
+     BERD8PSK_Ecualizador=CalcularErrorRuidoCanalEcualizado(xD8PSK, Nf, NFFT, 8 ,Nofdm, txbitsD8PSK, SNR_vector, h, pilotoD8PSK);
+     BERDBPSKRuido_Ecualizador(i,:) = BERDBPSK_Ecualizador;
+     BERDQPSKRuido_Ecualizador(i,:) = BERDQPSK_Ecualizador;
+     BERD8PSKRuido_Ecualizador(i,:) = BERD8PSK_Ecualizador;
+<span class="keyword">end</span>
+BERDBPSKRuido_avg_Ecualizador = zeros(1,length(SNR_vector));
+BERDQPSKRuido_avg_Ecualizador = zeros(1,length(SNR_vector));
+BERD8PSKRuido_avg_Ecualizador = zeros(1,length(SNR_vector));
+
+<span class="keyword">for</span> i=1:N_tramas
+      BERDBPSKRuido_avg_Ecualizador = BERDBPSKRuido_avg_Ecualizador + BERDBPSKRuido_Ecualizador(i,:);
+      BERDQPSKRuido_avg_Ecualizador = BERDQPSKRuido_avg_Ecualizador + BERDQPSKRuido_Ecualizador(i,:);
+      BERD8PSKRuido_avg_Ecualizador = BERD8PSKRuido_avg_Ecualizador + BERD8PSKRuido_Ecualizador(i,:);
+<span class="keyword">end</span>
+BERDBPSKRuido_avg_Ecualizador = BERDBPSKRuido_avg_Ecualizador./N_tramas;
+BERDQPSKRuido_avg_Ecualizador = BERDQPSKRuido_avg_Ecualizador./N_tramas;
+BERD8PSKRuido_avg_Ecualizador = BERD8PSKRuido_avg_Ecualizador./N_tramas;
+figure
+
+semilogy(SNR_vector, BERDBPSKRuido_avg, <span class="string">'-*'</span>);  hold <span class="string">on</span>
+semilogy(SNR_vector, BERDBPSKRuido_avg_Ecualizador, <span class="string">'-o'</span>);
+semilogy(SNR_vector, BERDQPSKRuido_avg, <span class="string">'-*'</span>);
+semilogy(SNR_vector, BERDQPSKRuido_avg_Ecualizador, <span class="string">'-o'</span>);
+semilogy(SNR_vector, BERD8PSKRuido_avg, <span class="string">'-*'</span>);
+semilogy(SNR_vector, BERD8PSKRuido_avg_Ecualizador, <span class="string">'-o'</span>);
+
+legend(<span class="string">'Simulado DBPSK Sin Ecualizador'</span>,<span class="string">'Simulado DBPSK Con Ecualizador'</span>, <span class="string">'Simulado DQPSK Sin Ecualizador'</span>, <span class="string">'Simulado DQPSK Con Ecualizador'</span>, <span class="string">'Simulado D8PSK Sin Ecualizador'</span>, <span class="string">'Simulado D8PSK Con Ecualizador'</span>)
+xlabel(<span class="string">'SNR (dB)'</span>);  ylabel(<span class="string">'BER de DMPSK'</span>)
+grid <span class="string">on</span>
+title(<span class="string">'BER vs SNR  sin FEC con canal con prefijo c&iacute;clico y con ecualizador'</span>)
+figure
+
+semilogy(SNR_vector, BERDBPSKRuido_avg_Ecualizador, <span class="string">'-o'</span>);  hold <span class="string">on</span>
+semilogy(SNR_vector, theoryBerDBPSK);
+semilogy(SNR_vector, BERDQPSKRuido_avg_Ecualizador, <span class="string">'-o'</span>);
+semilogy(SNR_vector, theoryBerDQPSK);
+semilogy(SNR_vector, BERD8PSKRuido_avg_Ecualizador, <span class="string">'-o'</span>);
+semilogy(SNR_vector, theoryBerD8PSK);
+
+legend(<span class="string">'Simulado DBPSK'</span>,<span class="string">'Te&oacute;rico DBPSK'</span>, <span class="string">'Simulado DQPSK'</span>, <span class="string">'Teorico DQPSK'</span>, <span class="string">'Simulado D8PSK'</span>, <span class="string">'Teorico D8PSK'</span>)
+xlabel(<span class="string">'SNR (dB)'</span>);  ylabel(<span class="string">'BER de DMPSK'</span>)
+grid <span class="string">on</span>
+title(<span class="string">'BER vs SNR  sin FEC con canal con prefijo c&iacute;clico y con ecualizador'</span>)
+</pre><img vspace="5" hspace="5" src="PRIME_04.png" alt=""> <img vspace="5" hspace="5" src="PRIME_05.png" alt=""> <p>Se muestra el resultado de introducir el ecualizador en recepci&oacute;n. Se muestran dos figuras, una figura muestra las curvas de error BER en funci&oacute;n de la SNR de las se&ntilde;ales recibidas con y sin ecualizador. La siguiente figura, muestra las curvas creadas con ecualizador junto con las te&oacute;ricas sin distorsi&oacute;n de canal. Se observa en las figuras, como el error de fondo que limitaba todas las se&ntilde;ales con un BER muy grande, el ecualizador lo soluciona. Se observa que tal y como se esperaba la curva te&oacute;rica es parecida a la de con ecualizador, pero las curvas se desplezan un poco a la derecha. Esto se debe a que el ecualizador es Zero-Forcing y como vimos hace que se aumente el SNR y por tanto los errores. Para DBPSK, encontramos que para un BER de 10^-4 hay una diferencia de SNR de 7 dB con respecto a la te&oacute;rica. Para DQPSK, con un BER de 10^-4 hay una direncia aproximada de unos 6 dB. Por &uacute;ltimo, para un BER de 10^-4, tenemos una diferenca de SNR de casi 8 dB.</p><pre class="codeinput">clear <span class="string">all</span>;
+</pre><h2 id="24">Apartado 3: Implementaci&oacute;n de todos los modos de comunicaci&oacute;n de PRIME con FEC</h2><p>Partiendo del sistema ya definido con su c&oacute;digo para la obtenci&oacute;n de curvas de BER frente a SNR, incluyendo canal real, incluir las t&eacute;cnicas de correcci&oacute;n de errores, FEC, definidas en el est&aacute;ndar. Para implementar FEC es necesario modificar los valores de algunos par&aacute;metros de simulaci&oacute;n. Se debe justificar la modificaci&oacute;n, teniendo en cuenta que las tramas payload deben construirse de acuerdo al est&aacute;ndar PRIME, que se establece una diferencia entre bits de informaci&oacute;n, o antes de codificar, y bits codificados, la existencia de bits de vaciado (flushing), etc.</p><h2 id="25">Apartado 3.1:  Modificaci&oacute;n de par&aacute;metros.</h2><p>Cuando aplicamos FEC, se sabe que el codificador es el standard usado por PRIME seg&uacute;n se especifica en dicho standard. Se duplican los bits de entrada y por tanto los paquetes necesarios para enviar la cadena. El codificador que usa PRIME, usa 7 registros que para para la entrada de cada paquete se deben reiniciar a cero. Para reiniciar los registros a cero, se a&ntilde;aden 8 bits de valor 0 al inicio de la cadena, estos bits se conocen como flushing.</p><p>Para poder computar la variaci&oacute;n de paquetes transmitidos con FEC, se han creado dos funciones para calcularlo, se muestran los paquetes necesarios para enviar una cadena de 80000 bits en todos los formatos de modulaci&oacute;n aceptados por prime con y sin FEC. Se puede ver que no en todos los caso con FEC es el doble exactamente de paquetes a sin FEC, ya que el n&uacute;mero de bits no es redondo para rellenar todos paquetes, por lo que el &uacute;ltimo paquete se rellena con ceros al final. Se puede ver tambi&eacute;n como aumentan los paquetes enviados enviados a casi el doble con FEC que sin FEC.</p><pre class="codeinput">clear; close <span class="string">all</span>, format <span class="string">compact</span>
+Nf    =	96;  <span class="comment">% Numero de portadoras con datos (+1 por el piloto)</span>
+Nofdm = 63; <span class="comment">% N&uacute;mero de s&iacute;mbolos OFDM por trama</span>
+numPaquetesDBPSKFEC = calcularNumeroPaquetesFEC(80000, 2, Nofdm, Nf)
+numPaquetesDBPSKnoFEC = calcularNumeroPaquetesnoFEC(80000, 2, Nofdm, Nf)
+
+numPaquetesDQPSKFEC = calcularNumeroPaquetesFEC(80000, 4, Nofdm, Nf)
+numPaquetesDQPSKnoFEC = calcularNumeroPaquetesnoFEC(80000, 4, Nofdm, Nf)
+
+numPaquetesD8PSKFEC = calcularNumeroPaquetesFEC(80000, 8, Nofdm, Nf)
+numPaquetesD8PSKnoFEC = calcularNumeroPaquetesnoFEC(80000, 8, Nofdm, Nf)
+</pre><pre class="codeoutput">numPaquetesDBPSKFEC =
+    27
+numPaquetesDBPSKnoFEC =
+    14
+numPaquetesDQPSKFEC =
+    14
+numPaquetesDQPSKnoFEC =
+     7
+numPaquetesD8PSKFEC =
+     9
+numPaquetesD8PSKnoFEC =
+     5
+</pre><h2 id="28">Apartado 3.2.1: Cadena con entrelazado en ausencia de ruido.</h2><pre class="codeinput">NFFT  =	512;  <span class="comment">% Tama&ntilde;o de la FFT</span>
+Fs    =	 250000;  <span class="comment">% Frecuencia de muestreo</span>
+df    =  Fs/NFFT ;  <span class="comment">% Separaci&oacute;n entre portadoras</span>
+Nf    =	96;  <span class="comment">% Numero de portadoras con datos (+1 por el piloto)</span>
+N_tramas = 20;
+Nofdm = 63; <span class="comment">% N&uacute;mero de s&iacute;mbolos OFDM por trama</span>
+SNR_vector = 0:20;
+
+BERDBPSK_Entrelazado_Total = [];
+BERDQPSK_Entrelazado_Total = [];
+BERD8PSK_Entrelazado_Total = [];
+BERDBPSK_FEC_Total = [];
+BERDQPSK_FEC_Total = [];
+BERD8PSK_FEC_Total = [];
+
+BER_DBPSK_conFEC=zeros(N_tramas,length(SNR_vector));
+BER_DQPSK_conFEC=zeros(N_tramas,length(SNR_vector));
+BER_D8PSK_conFEC=zeros(N_tramas,length(SNR_vector));
+
+BER_DBPSK_sinFEC=zeros(N_tramas,length(SNR_vector));
+BER_DQPSK_sinFEC=zeros(N_tramas,length(SNR_vector));
+BER_D8PSK_sinFEC=zeros(N_tramas,length(SNR_vector));
+<span class="keyword">for</span> iter=1:N_tramas
+    [txbitsDBPSK,xDBPSK] = ModulacionInterleaver(2, Nf, NFFT, Nofdm);
+    [txbitsDQPSK,xDQPSK] = ModulacionInterleaver(4, Nf, NFFT, Nofdm);
+    [txbitsD8PSK,xD8PSK] = ModulacionInterleaver(8, Nf, NFFT, Nofdm);
+    <span class="comment">% Demodulacion con Interleaver</span>
+    h=[-0.1,0.3,-0.5,0.7,-0.9,0.7,-0.5,0.3,-0.1];
+    BERDBPSK_Entrelazado=CalcularErrorInterleaver(xDBPSK, Nf, NFFT, 2 ,Nofdm, txbitsDBPSK);
+    BERDQPSK_Entrelazado=CalcularErrorInterleaver(xDQPSK, Nf, NFFT, 4 ,Nofdm, txbitsDQPSK);
+    BERD8PSK_Entrelazado=CalcularErrorInterleaver(xD8PSK, Nf, NFFT, 8 ,Nofdm, txbitsD8PSK);
+    BERDBPSK_Entrelazado_Total = [BERDBPSK_Entrelazado_Total BERDBPSK_Entrelazado];
+    BERDQPSK_Entrelazado_Total = [BERDQPSK_Entrelazado_Total BERDQPSK_Entrelazado];
+    BERD8PSK_Entrelazado_Total = [BERD8PSK_Entrelazado_Total BERD8PSK_Entrelazado];
+<span class="comment">% No hay errores al a&ntilde;adir el entrelazado</span>
+<span class="keyword">end</span>
+BERDBPSK_Entrelazado_Total = sum(BERDBPSK_Entrelazado_Total)
+BERDQPSK_Entrelazado_Total = sum(BERDQPSK_Entrelazado_Total)
+BERD8PSK_Entrelazado_Total = sum(BERD8PSK_Entrelazado_Total)
+</pre><pre class="codeoutput">BERDBPSK_Entrelazado_Total =
+     0
+BERDQPSK_Entrelazado_Total =
+     0
+BERD8PSK_Entrelazado_Total =
+     0
+</pre><p>Tal y como se esperaba, en ausencia de ruido y unicamente a&ntilde;adiendo el entrelazado y desentrelazado, no se producen errores y por tanto, al igual que el apartado 1, podemos decir que se ha a&ntilde;adido correctamente los bloques de entrelazado y desentralazado.</p><h2 id="30">Apartado 3.2.2: Cadena con entrelazado y FEC en ausencia de ruido.</h2><pre class="codeinput"><span class="comment">%A&ntilde;adimos la codificaci&oacute;n</span>
+h=[-0.1,0.3,-0.5,0.7,-0.9,0.7,-0.5,0.3,-0.1];
+NFFT  =	512;  <span class="comment">% Tama&ntilde;o de la FFT</span>
+Fs    =	 250000;  <span class="comment">% Frecuencia de muestreo</span>
+df    =  Fs/NFFT ;  <span class="comment">% Separaci&oacute;n entre portadoras</span>
+Nf    =	96;  <span class="comment">% Numero de portadoras con datos (+1 por el piloto)</span>
+N_tramas = 20;
+Nofdm = 63; <span class="comment">% N&uacute;mero de s&iacute;mbolos OFDM por trama</span>
+SNR_vector = 0:20;
+<span class="keyword">for</span> i=1:N_tramas
+    lg = 7;
+    enrejado = poly2trellis([lg],[171,133]);
+    [txbitsDBPSK,xDBPSK] = ModulacionConvolutionalEncoder(2, Nf, NFFT, Nofdm, enrejado);
+    [txbitsDQPSK,xDQPSK] = ModulacionConvolutionalEncoder(4, Nf, NFFT, Nofdm, enrejado);
+    [txbitsD8PSK,xD8PSK] = ModulacionConvolutionalEncoder(8, Nf, NFFT, Nofdm, enrejado);
+    <span class="comment">% Demodulacion con Convolutional Encoder</span>
+    BERDBPSK_FEC=CalcularErrorConvolutionalEncoder(xDBPSK, Nf, NFFT, 2 ,Nofdm, txbitsDBPSK, enrejado);
+    BERDQPSK_FEC=CalcularErrorConvolutionalEncoder(xDQPSK, Nf, NFFT, 4 ,Nofdm, txbitsDQPSK, enrejado);
+    BERD8PSK_FEC=CalcularErrorConvolutionalEncoder(xD8PSK, Nf, NFFT, 8 ,Nofdm, txbitsD8PSK, enrejado);
+    BERDBPSK_FEC_Total = [BERDBPSK_FEC_Total BERDBPSK_FEC];
+    BERDQPSK_FEC_Total = [BERDQPSK_FEC_Total BERDQPSK_FEC];
+    BERD8PSK_FEC_Total = [BERD8PSK_FEC_Total BERD8PSK_FEC];
+<span class="keyword">end</span>
+BERDBPSK_FEC_Total = sum(BERDBPSK_FEC_Total)
+BERDQPSK_FEC_Total = sum(BERDQPSK_FEC_Total)
+BERD8PSK_FEC_Total = sum(BERD8PSK_FEC_Total)
+</pre><pre class="codeoutput">BERDBPSK_FEC_Total =
+     0
+BERDQPSK_FEC_Total =
+     0
+BERD8PSK_FEC_Total =
+     0
+</pre><p>Tal y como se esperaba, en ausencia de ruido y unicamente a&ntilde;adiendo el entrelazado y desentrelazado, no se producen errores y por tanto, al igual que el apartado 1, podemos decir que se ha a&ntilde;adido correctamente los bloques de entrelazado y desentralazado y de convolutional encoder.</p><h2 id="32">Apartado 3.2.3: Curvas BER vs SNR</h2><p>Primero representaremos las curvas de BER vs SNR sin FEC y sin canal frente a las propias curvas con FEC sin canal:</p><pre class="codeinput"><span class="keyword">for</span> i=1:N_tramas
+    BER_DBPSK=zeros(N_tramas,length(SNR_vector));
+    BER_DQPSK=zeros(N_tramas,length(SNR_vector));
+    BER_D8PSK=zeros(N_tramas,length(SNR_vector));
+    BER_DBPSK_FEC=zeros(N_tramas,length(SNR_vector));
+    BER_DQPSK_FEC=zeros(N_tramas,length(SNR_vector));
+    BER_D8PSK_FEC=zeros(N_tramas,length(SNR_vector));
+
+    [txbitsDBPSK,xDBPSK] = ModulacionOFDMScrambler(2, Nf, NFFT, Nofdm);
+    [txbitsDQPSK,xDQPSK] = ModulacionOFDMScrambler(4, Nf, NFFT, Nofdm);
+    [txbitsD8PSK,xD8PSK] = ModulacionOFDMScrambler(8, Nf, NFFT, Nofdm);
+
+    <span class="comment">% Se a&ntilde;ase ruido:</span>
+    BERDBPSK=CalcularErrorRuido(xDBPSK, Nf, NFFT, 2 ,Nofdm, txbitsDBPSK, SNR_vector);
+    BERDQPSK=CalcularErrorRuido(xDQPSK, Nf, NFFT, 4 ,Nofdm, txbitsDQPSK, SNR_vector);
+    BERD8PSK=CalcularErrorRuido(xD8PSK, Nf, NFFT, 8 ,Nofdm, txbitsD8PSK, SNR_vector);
+    BERDBPSKRuido(i,:) = BERDBPSK;
+    BERDQPSKRuido(i,:) = BERDQPSK;
+    BERD8PSKRuido(i,:) = BERD8PSK;
+
+    <span class="comment">% Ahora con FEC:</span>
+    lg = 7;
+    enrejado = poly2trellis([lg],[171,133]);
+    [txbitsDBPSK_FEC,xDBPSK_FEC] = ModulacionConvolutionalEncoder(2, Nf, NFFT, Nofdm, enrejado);
+    [txbitsDQPSK_FEC,xDQPSK_FEC] = ModulacionConvolutionalEncoder(4, Nf, NFFT, Nofdm, enrejado);
+    [txbitsD8PSK_FEC,xD8PSK_FEC] = ModulacionConvolutionalEncoder(8, Nf, NFFT, Nofdm, enrejado);
+    BERDBPSK_FEC=CalcularErrorConvolutionalEncoderRuido(xDBPSK_FEC, Nf, NFFT, 2 ,Nofdm, txbitsDBPSK_FEC, enrejado, SNR_vector);
+    BERDQPSK_FEC=CalcularErrorConvolutionalEncoderRuido(xDQPSK_FEC, Nf, NFFT, 4 ,Nofdm, txbitsDQPSK_FEC, enrejado, SNR_vector);
+    BERD8PSK_FEC=CalcularErrorConvolutionalEncoderRuido(xD8PSK_FEC, Nf, NFFT, 8 ,Nofdm, txbitsD8PSK_FEC, enrejado, SNR_vector);
+    BERDBPSKRuido_FEC(i,:) = BERDBPSK_FEC;
+    BERDQPSKRuido_FEC(i,:) = BERDQPSK_FEC;
+    BERD8PSKRuido_FEC(i,:) = BERD8PSK_FEC;
+<span class="keyword">end</span>
+BERDBPSKRuido_avg = zeros(1,length(SNR_vector));
+BERDQPSKRuido_avg = zeros(1,length(SNR_vector));
+BERD8PSKRuido_avg = zeros(1,length(SNR_vector));
+BERDBPSKRuido_avg_FEC = zeros(1,length(SNR_vector));
+BERDQPSKRuido_avg_FEC = zeros(1,length(SNR_vector));
+BERD8PSKRuido_avg_FEC = zeros(1,length(SNR_vector));
+<span class="keyword">for</span> i=1:N_tramas
+      BERDBPSKRuido_avg = BERDBPSKRuido_avg + BERDBPSKRuido(i,:);
+      BERDQPSKRuido_avg = BERDQPSKRuido_avg + BERDQPSKRuido(i,:);
+      BERD8PSKRuido_avg = BERD8PSKRuido_avg + BERD8PSKRuido(i,:);
+      BERDBPSKRuido_avg_FEC = BERDBPSKRuido_avg_FEC + BERDBPSKRuido_FEC(i,:);
+      BERDQPSKRuido_avg_FEC = BERDQPSKRuido_avg_FEC + BERDQPSKRuido_FEC(i,:);
+      BERD8PSKRuido_avg_FEC = BERD8PSKRuido_avg_FEC + BERD8PSKRuido_FEC(i,:);
+<span class="keyword">end</span>
+BERDBPSKRuido_avg = BERDBPSKRuido_avg./N_tramas;
+BERDQPSKRuido_avg = BERDQPSKRuido_avg./N_tramas;
+BERD8PSKRuido_avg = BERD8PSKRuido_avg./N_tramas;
+
+BERDBPSKRuido_avg_FEC = BERDBPSKRuido_avg_FEC./N_tramas;
+BERDQPSKRuido_avg_FEC = BERDQPSKRuido_avg_FEC./N_tramas;
+BERD8PSKRuido_avg_FEC = BERD8PSKRuido_avg_FEC./N_tramas;
+figure
+semilogy(SNR_vector, BERDBPSKRuido_avg, <span class="string">'-o'</span>);  hold <span class="string">on</span>
+semilogy(SNR_vector, BERDBPSKRuido_avg_FEC,     <span class="string">'-x'</span>);
+semilogy(SNR_vector, BERDQPSKRuido_avg, <span class="string">'-o'</span>);
+semilogy(SNR_vector, BERDQPSKRuido_avg_FEC,     <span class="string">'-x'</span>);
+semilogy(SNR_vector, BERD8PSKRuido_avg, <span class="string">'-o'</span>);
+semilogy(SNR_vector, BERD8PSKRuido_avg_FEC,     <span class="string">'-x'</span>);
+
+legend(<span class="string">'DBPSK sin FEC'</span>,<span class="string">'DBPSK con FEC'</span>, <span class="string">'DQPSK sin FEC'</span>, <span class="string">'DQPSK con FEC'</span>, <span class="string">'D8PSK sin FEC'</span>, <span class="string">'D8PSK con FEC'</span>)
+xlabel(<span class="string">'SNR (dB)'</span>);  ylabel(<span class="string">'BER de DMPSK'</span>)
+grid <span class="string">on</span>
+title(<span class="string">'Resultados del sistema OFDM sin FEC vs con FEC'</span>)
+</pre><img vspace="5" hspace="5" src="PRIME_06.png" alt=""> <p>Se muestra una representaci&oacute;n de BER vs SNR con y sin FEC cuando no se a&ntilde;ade el canal, ni prefijo c&iacute;clico, ni ecualizaci&oacute;n. Como se puede apreciar, el rendimiento es peor cuando se introduce FEC que cuando se introduce FEC, esto se puede deber a que la codicodificaci&oacute;n de un bit est&aacute; influenciada por las anteriores, por lo que el error se arrastra. Para condiciones con SNR mayor a un cierto umbral, el SNR necesario para un BER disminuye r&aacute;pidamente. El umbral para cada modulaci&oacute;n es: a partir de 2dB para DBPSK, a partir de 4 dB para DQPSK y a partir de 8 dB para D8PSK.</p><p>Podemos decir que con FEC se mandan m&aacute;s bits para un n&uacute;mero fijo de bits de informaci&oacute;n, estos bits permiten corregir errores al decodificar, por lo que necesita menor SNR y la potencia para transmitir informaci&oacute;n va a ser mayor. Por otro lado, se reduce la velocidad de transmisi&oacute;n y se aumenta considerablemente la complejidad.</p><h2 id="35">Canal con ecualizaci&oacute;n:</h2><pre class="codeinput">h=[-0.1,0.3,-0.5,0.7,-0.9,0.7,-0.5,0.3,-0.1];
+<span class="keyword">for</span> i=1:N_tramas
+    BER_DBPSK=zeros(N_tramas,length(SNR_vector));
+    BER_DQPSK=zeros(N_tramas,length(SNR_vector));
+    BER_D8PSK=zeros(N_tramas,length(SNR_vector));
+
+    [txbitsDBPSK,xDBPSK, pilotoDBPSK] = ModulacionOFDMEcualizacion(2, Nf, NFFT, Nofdm);
+    [txbitsDQPSK,xDQPSK, pilotoDQPSK] = ModulacionOFDMEcualizacion(4, Nf, NFFT, Nofdm);
+    [txbitsD8PSK,xD8PSK, pilotoD8PSK] = ModulacionOFDMEcualizacion(8, Nf, NFFT, Nofdm);
+    <span class="comment">% Demodulacion con Ecualizador Zero Forcing</span>
+     BERDBPSK_Ecualizador=CalcularErrorRuidoCanalEcualizado(xDBPSK, Nf, NFFT, 2 ,Nofdm, txbitsDBPSK, SNR_vector, h, pilotoDBPSK);
+     BERDQPSK_Ecualizador=CalcularErrorRuidoCanalEcualizado(xDQPSK, Nf, NFFT, 4 ,Nofdm, txbitsDQPSK, SNR_vector, h, pilotoDQPSK);
+     BERD8PSK_Ecualizador=CalcularErrorRuidoCanalEcualizado(xD8PSK, Nf, NFFT, 8 ,Nofdm, txbitsD8PSK, SNR_vector, h, pilotoD8PSK);
+     BERDBPSKRuido_Ecualizador(i,:) = BERDBPSK_Ecualizador;
+     BERDQPSKRuido_Ecualizador(i,:) = BERDQPSK_Ecualizador;
+     BERD8PSKRuido_Ecualizador(i,:) = BERD8PSK_Ecualizador;
+<span class="keyword">end</span>
+BERDBPSKRuido_avg_Ecualizador = zeros(1,length(SNR_vector));
+BERDQPSKRuido_avg_Ecualizador = zeros(1,length(SNR_vector));
+BERD8PSKRuido_avg_Ecualizador = zeros(1,length(SNR_vector));
+
+<span class="keyword">for</span> i=1:N_tramas
+      BERDBPSKRuido_avg_Ecualizador = BERDBPSKRuido_avg_Ecualizador + BERDBPSKRuido_Ecualizador(i,:);
+      BERDQPSKRuido_avg_Ecualizador = BERDQPSKRuido_avg_Ecualizador + BERDQPSKRuido_Ecualizador(i,:);
+      BERD8PSKRuido_avg_Ecualizador = BERD8PSKRuido_avg_Ecualizador + BERD8PSKRuido_Ecualizador(i,:);
+<span class="keyword">end</span>
+BERDBPSKRuido_avg_Ecualizador = BERDBPSKRuido_avg_Ecualizador./N_tramas;
+BERDQPSKRuido_avg_Ecualizador = BERDQPSKRuido_avg_Ecualizador./N_tramas;
+BERD8PSKRuido_avg_Ecualizador = BERD8PSKRuido_avg_Ecualizador./N_tramas;
+<span class="keyword">for</span> i=1:N_tramas
+    BER_DBPSK_FEC=zeros(N_tramas,length(SNR_vector));
+    BER_DQPSK_FEC=zeros(N_tramas,length(SNR_vector));
+    BER_D8PSK_FEC=zeros(N_tramas,length(SNR_vector));
+
+    lg = 7;
+    enrejado = poly2trellis([lg],[171,133]);
+    [txbitsDBPSK_FEC,xDBPSK_FEC,piloto_ecualizadorDBPSK] = ModulacionConvolutionalEncoderPC(2, Nf, NFFT, Nofdm, enrejado);
+    [txbitsDQPSK_FEC,xDQPSK_FEC,piloto_ecualizadorDQPSK] = ModulacionConvolutionalEncoderPC(4, Nf, NFFT, Nofdm, enrejado);
+    [txbitsD8PSK_FEC,xD8PSK_FEC,piloto_ecualizadorD8PSK] = ModulacionConvolutionalEncoderPC(8, Nf, NFFT, Nofdm, enrejado);
+    BERDBPSK_FEC=CalcularErrorConvolutionalEncoderRuidoCanal(xDBPSK_FEC, Nf, NFFT, 2 ,Nofdm, txbitsDBPSK_FEC, enrejado, SNR_vector, h, piloto_ecualizadorDBPSK);
+    BERDQPSK_FEC=CalcularErrorConvolutionalEncoderRuidoCanal(xDQPSK_FEC, Nf, NFFT, 4 ,Nofdm, txbitsDQPSK_FEC, enrejado, SNR_vector, h, piloto_ecualizadorDQPSK);
+    BERD8PSK_FEC=CalcularErrorConvolutionalEncoderRuidoCanal(xD8PSK_FEC, Nf, NFFT, 8 ,Nofdm, txbitsD8PSK_FEC, enrejado, SNR_vector, h, piloto_ecualizadorD8PSK);
+    BERDBPSKRuido_FEC(i,:) = BERDBPSK_FEC;
+    BERDQPSKRuido_FEC(i,:) = BERDQPSK_FEC;
+    BERD8PSKRuido_FEC(i,:) = BERD8PSK_FEC;
+<span class="keyword">end</span>
+BERDBPSKRuido_avg_FEC = zeros(1,length(SNR_vector));
+BERDQPSKRuido_avg_FEC = zeros(1,length(SNR_vector));
+BERD8PSKRuido_avg_FEC = zeros(1,length(SNR_vector));
+<span class="keyword">for</span> i=1:N_tramas
+      BERDBPSKRuido_avg_FEC = BERDBPSKRuido_avg_FEC + BERDBPSKRuido_FEC(i,:);
+      BERDQPSKRuido_avg_FEC = BERDQPSKRuido_avg_FEC + BERDQPSKRuido_FEC(i,:);
+      BERD8PSKRuido_avg_FEC = BERD8PSKRuido_avg_FEC + BERD8PSKRuido_FEC(i,:);
+<span class="keyword">end</span>
+BERDBPSKRuido_avg_FEC = BERDBPSKRuido_avg_FEC./N_tramas;
+BERDQPSKRuido_avg_FEC = BERDQPSKRuido_avg_FEC./N_tramas;
+BERD8PSKRuido_avg_FEC = BERD8PSKRuido_avg_FEC./N_tramas;
+
+figure
+
+semilogy(SNR_vector, BERDBPSKRuido_avg_FEC, <span class="string">'-*'</span>);  hold <span class="string">on</span>
+semilogy(SNR_vector, BERDBPSKRuido_avg_Ecualizador, <span class="string">'-o'</span>);
+semilogy(SNR_vector, BERDQPSKRuido_avg_FEC, <span class="string">'-*'</span>);
+semilogy(SNR_vector, BERDQPSKRuido_avg_Ecualizador, <span class="string">'-o'</span>);
+semilogy(SNR_vector, BERD8PSKRuido_avg_FEC, <span class="string">'-*'</span>);
+semilogy(SNR_vector, BERD8PSKRuido_avg_Ecualizador, <span class="string">'-o'</span>);
+
+legend(<span class="string">'DBPSK Con FEC'</span>,<span class="string">'DBPSK Sin FEC'</span>, <span class="string">'DQPSK Con FEC'</span>, <span class="string">'DQPSK Sin FEC'</span>, <span class="string">'D8PSK Con FEC'</span>, <span class="string">'D8PSK Sin FEC'</span>)
+xlabel(<span class="string">'SNR (dB)'</span>);  ylabel(<span class="string">'BER de DMPSK'</span>)
+grid <span class="string">on</span>
+title(<span class="string">'Resultados del sistema OFDM con FEC vs sin FEC con canal y ecualizador'</span>)
+</pre><img vspace="5" hspace="5" src="PRIME_07.png" alt=""> <p>En este caso y como esper&aacute;bamos, si comparamos las curvas con canal y ecualizaci&oacute;n con FEC y sin FEC, se puede observar las curvas sin FEC tienen mejor respuesta que las curvas sin FEC, los rendimientos ademas cambian para cada modulaci&oacute;n: Para DBPSK para un BER de 10^-4 hay una diferencia de SNR de unos 5 dB, para DQPSK para una BER de 10^-3 hay una diferencia de SNR de unos 6 dB (sin FEC se necesita m&aacute;s SNR para llegar a 10^-4) para D8PSK para una BER de 10^-2, hay una diferencia de 9 dB (sin FEC se necesita mucho m&aacute;s SNR para bajar el BER).</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Práctica PRIME
+% Autores: Alfredo Sánchez Sánchez y Manuel Mora de amarillas.
+%%
+% El proyecto consiste en realizar un modelado de la simulación de la transmisión de tramas de Carga (Payload) según el estándar de PRIME,  ITU-T G.9904. No se tendrá en cuenta la parte de la trama destinada a la transmisión del preámbulo (Preamble), Encabezado (Header) ni del CRC. 
+%% Apartado 1: Implementación de todos los modos de comunicación de PRIME en el caso de canal sin distorsión y sin FEC 
+%% Apartado 1.1: Elección de parámetros de simulación
+% Los bits a transmitir, deben ser superiores a 10^4 o 10000 pues queremos
+% una simulación fiable de BER de 10^-4. En nuestro caso, hemos
+% seleccionado como límite 20000, que es un valor fiable para todos los
+% tipos de modulación, especialmente paa la modulación de 2, que es la que
+% enviaría un menor número de bits. El número de tramas que enviaremos será
+% 4, sabiendo que con DBPSK el número de símbolos a transmitir es el doble
+% que en DQPSK y este es el doble que con D8PSK.
+% El motivo por el que queremos enviar un número elevados de bits es que
+% queremos hacer que la simulación, se asemeje más a los cálculos teóricos,
+% pués cuantos más bits se envíen, el factor aleatorio va desapareciendo.
+%%
+% El número de símbolos de OFDM por trama será 63, que es el máximo que
+% permite el standard PRIME en sus especificaciones para que la transmisión
+% sea lo más rápida posible.
+%%
+% Para terminar, el número de portadoras por simbolo OFDM será de 96, este
+% dato es el que viene dado por el standard y significa que por cada
+% símbolo OFDM van 96 símbolos modulados en DBPSK, DQPSK o D8PSK.
+clear; close all, format compact
+NFFT  =	512;  % Tamaño de la FFT
+Fs    =	 25600;  % Frecuencia de muestreo
+df    =  Fs/NFFT ;  % Separación entre portadoras
+Nf    =	96;  % Numero de portadoras con datos (+1 por el piloto)
+N_tramas = 4;
+Nofdm = 63; % Número de símbolos OFDM por trama
+% El número de bits totales será: N_bits_totales =
+% Nf*Nofdm*log2(M)*N_tramas, donde M será 2, 4, 8 dependiendo del tipo de
+% modulación.
+%% Apartado 1.2.1: Demostrar que en ausencia de ruido sin FEC, sin prefijo cíclico y sin aleatorización, no se generá errores.
+NFFT  =	512;  % Tamaño de la FFT
+Fs    =	 256000;  % Frecuencia de muestreo
+df    =  Fs/NFFT ;  % Separación entre portadoras
+Nf    =	96;  % Numero de portadoras con datos (+1 por el piloto)
+N_tramas = 10;
+Nofdm = 63; % Número de símbolos OFDM por trama
+BERDBPSK_Total = [];
+BERDQPSK_Total = [];
+BERD8PSK_Total = [];
+
+for i = 1:N_tramas
+    [txbitsDBPSK,xDBPSK] = ModulacionOFDM(2, Nf, NFFT, Nofdm);
+    [txbitsDQPSK,xDQPSK] = ModulacionOFDM(4, Nf, NFFT, Nofdm);
+    [txbitsD8PSK,xD8PSK] = ModulacionOFDM(8, Nf, NFFT, Nofdm);
+    % Demodulacion sin ruido
+    BERDBPSK=CalcularError(xDBPSK, Nf, NFFT, 2 ,Nofdm, txbitsDBPSK);
+    BERDQPSK=CalcularError(xDQPSK, Nf, NFFT, 4 ,Nofdm, txbitsDQPSK);
+    BERD8PSK=CalcularError(xD8PSK, Nf, NFFT, 8 ,Nofdm, txbitsD8PSK);
+    BERDBPSK_Total = [BERDBPSK_Total BERDBPSK];
+    BERDQPSK_Total = [BERDQPSK_Total BERDQPSK];
+    BERD8PSK_Total = [BERD8PSK_Total BERD8PSK];
+        
+end
+BERDBPSK_Total = sum(BERDBPSK_Total)
+BERDQPSK_Total = sum(BERDQPSK_Total)
+BERD8PSK_Total = sum(BERD8PSK_Total)
+
+%%
+% Efectivamente, anteriormente se muestra que el error es nulo y tiene todo el sentido, puesto que no se
+% introduce ningún tipo de distorsión ni ruido en ningún punto entre la
+% señal transmitida y la recibida. Todos los bloques simulados funcionan
+% correctamente y por tanto, no añaden ningún error, pués los bloques en sí
+% no añaden error. 
+%% Apartado 1.2.2: Demostrar que en ausencia de ruido sin FEC, sin prefijo cíclico y con aleatorización, no se generá errores.
+% En este apartado, se añadirá la parte de Aleatorización y
+% Dealeatorización, con una función Scrambler.
+
+% Ruido para el apartado 1.2.3:
+BERDBPSK_Total_Scrambler = [];
+BERDQPSK_Total_Scrambler = [];
+BERD8PSK_Total_Scrambler = [];
+SNR_vector = 0:20;
+for i = 1:N_tramas
+    [txbitsDBPSK,xDBPSK] = ModulacionOFDMScrambler(2, Nf, NFFT, Nofdm);
+    [txbitsDQPSK,xDQPSK] = ModulacionOFDMScrambler(4, Nf, NFFT, Nofdm);
+    [txbitsD8PSK,xD8PSK] = ModulacionOFDMScrambler(8, Nf, NFFT, Nofdm);
+    % Demodulacion con Scrambler
+    BERDBPSKScrambler=CalcularErrorScrambler(xDBPSK, Nf, NFFT, 2 ,Nofdm, txbitsDBPSK);
+    BERDQPSKScrambler=CalcularErrorScrambler(xDQPSK, Nf, NFFT, 4 ,Nofdm, txbitsDQPSK);
+    BERD8PSKScrambler=CalcularErrorScrambler(xD8PSK, Nf, NFFT, 8 ,Nofdm, txbitsD8PSK);
+    BERDBPSK_Total_Scrambler = [BERDBPSK_Total_Scrambler BERDBPSKScrambler];
+    BERDQPSK_Total_Scrambler = [BERDQPSK_Total_Scrambler BERDQPSKScrambler];
+    BERD8PSK_Total_Scrambler = [BERD8PSK_Total_Scrambler BERD8PSKScrambler];
+end
+BERDBPSK_Total_Scrambler = sum(BERDBPSK_Total_Scrambler)
+BERDQPSK_Total_Scrambler = sum(BERDQPSK_Total_Scrambler)
+BERD8PSK_Total_Scrambler = sum(BERD8PSK_Total_Scrambler)
+%%
+% Como ocurre en el apartado anterior, el BER es 0, pués
+% como en el caso anterior, no se introducía ningún error, en este caso y
+% solo al añadir la aleatorización que tampoco introduce ni distorsión, ni
+% errores, ni ruido, al compararar los bits transmitidos y los recibidos, el BER sale 0. 
+%% Apartado 1.2.3: Curvas BER vs SNR teóricas y simuladas, estas ultimas empleando secuencias de bits seudoaleatorias.
+% En este apartado, para ver como responde el sistema a interferencia de
+% ruido blanco, se añade dicho ruido a la señal antes de ser introducida en
+% el receptor. Se representará la final el error obtenido para distintos
+% valores de SNR.
+for i = 1:N_tramas
+    % Inicialización de vectores:
+    BER_DBPSK=zeros(N_tramas,length(SNR_vector));
+    BER_DQPSK=zeros(N_tramas,length(SNR_vector));
+    BER_D8PSK=zeros(N_tramas,length(SNR_vector));
+    % Se añase ruido:    
+    BERDBPSKR=CalcularErrorRuido(xDBPSK, Nf, NFFT, 2 ,Nofdm, txbitsDBPSK, SNR_vector);
+    BERDQPSKR=CalcularErrorRuido(xDQPSK, Nf, NFFT, 4 ,Nofdm, txbitsDQPSK, SNR_vector);
+    BERD8PSKR=CalcularErrorRuido(xD8PSK, Nf, NFFT, 8 ,Nofdm, txbitsD8PSK, SNR_vector);
+    BERDBPSKRuido(i,:) = BERDBPSKR;
+    BERDQPSKRuido(i,:) = BERDQPSKR;
+    BERD8PSKRuido(i,:) = BERD8PSKR;
+end
+BERDBPSKRuido_avg = zeros(1,length(SNR_vector));
+BERDQPSKRuido_avg = zeros(1,length(SNR_vector));
+BERD8PSKRuido_avg = zeros(1,length(SNR_vector));
+
+for i=1:N_tramas
+      BERDBPSKRuido_avg = BERDBPSKRuido_avg + BERDBPSKRuido(i,:);
+      BERDQPSKRuido_avg = BERDQPSKRuido_avg + BERDQPSKRuido(i,:);
+      BERD8PSKRuido_avg = BERD8PSKRuido_avg + BERD8PSKRuido(i,:);
+end
+BERDBPSKRuido_avg = BERDBPSKRuido_avg./N_tramas;
+BERDQPSKRuido_avg = BERDQPSKRuido_avg./N_tramas;
+BERD8PSKRuido_avg = BERD8PSKRuido_avg./N_tramas;
+
+theoryBerDBPSK = DBPSK_BER(SNR_vector);
+theoryBerDQPSK = DQPSK_BER(SNR_vector);
+theoryBerD8PSK = D8PSK_BER(SNR_vector);
+
+theoryBerDBPSK(find(theoryBerDBPSK<1e-5)) = NaN;
+theoryBerDQPSK(find(theoryBerDQPSK<1e-5)) = NaN;
+theoryBerD8PSK(find(theoryBerD8PSK<1e-5)) = NaN;
+
+figure
+
+semilogy(SNR_vector, BERDBPSKRuido_avg, '-*');  hold on
+semilogy(SNR_vector, theoryBerDBPSK);  
+semilogy(SNR_vector, BERDQPSKRuido_avg, '-x');  
+semilogy(SNR_vector, theoryBerDQPSK);  
+semilogy(SNR_vector, BERD8PSKRuido_avg, '-o'); 
+semilogy(SNR_vector, theoryBerD8PSK); 
+
+legend('Simulado DBPSK','Teórico DBPSK', 'Simulado DQPSK', 'Teorico DQPSK', 'Simulado D8PSK', 'Teorico D8PSK')
+xlabel('SNR (dB)');  ylabel('BER de DMPSK')
+grid on
+title('Resultados del sistema OFDM de DBPSK DQPSK y D8PSK sin FEC')
+ %%
+ % El sistema PRIME implementado hasta este momento tiene un comportamiento
+ % frente al ruido parecido al de la práctica 4 de OFDM, pues no se ha
+ % añadido ningún bloque de correción de errores.
+ %%
+ % Al representar las curvas de BER teóricas frente a las curvas de BER
+ % simuladas, se observa como ambas son prácticamente idénticas (menos en
+ % el caso de D8PSK que la práctica sale algo desplezada. Este es el
+ % resultado esperado, pues en ausencia de FEC, el error cometido para un
+ % determinado ruido blanco es igual con PRIME a una modulación OFDM normal
+ % y corriente.
+ 
+ %%
+ % Como ya se ha observado en otras prácticas, para un valor de BER se
+ % necesita mayor SNR para las modulaciones que utilizan mayor número de
+ % símbolos (D8PSK), pues la separación entre ellos es menor. Para la
+ % modulación DBPSK tanto la teórica como la práctica alcanzan un BER de
+ % 10^-4 para una SNR=10dB aproximadamente. Con la modulación DQPSK se
+ % alcanza en los 14dB (el 5 dB más prácticamente). Para D8PSK se aumenta la
+ % SNR se necesitan aproximadamente 20dB para alcanzarlos (el aumento es
+ % prácticamente el mismo que el aumento anterior)
+clear all;
+%% Apartado 2: Implementación de todos los modos de comunicación de PRIME en el caso de canal sin distorsión y sin FEC.
+% Así como en las implementaciones anteriores se ha supuesto un canal
+% invariante en frecuencia, en este apartado se asumirá que el canal cambia
+% con la frecuencia y que se producen retardos.
+%% Apartado 2.1: Señal inyectada
+
+%% Apartado 2.2: Representación gráfica del canal
+% Hay que cambiar a como nos piden en el enunciado que no lo entiendo bien.
+h=[-0.1,0.3,-0.5,0.7,-0.9,0.7,-0.5,0.3,-0.1];
+H = fft(h,length(h));
+figure;
+plot(abs(fftshift(H)));
+title('Transformada de Fourier discreta de la respuesta del canal, H(k)')
+xlabel('k')
+ylabel('Amplitud o valor')
+%% 
+% El canal, como se puede apreciar actua como un filtro que atenua las
+% bandas laterales y amplifica las bandas de los extremos.
+%% Apartado 2.3: Curvas BER vs SNR teóricas y simuladas, añadiendo el efecto del canal sin prefijo cíclico ni ecualizador.
+NFFT  =	512;  % Tamaño de la FFT
+Fs    =	 250000;  % Frecuencia de muestreo
+df    =  Fs/NFFT ;  % Separación entre portadoras
+Nf    =	96;  % Numero de portadoras con datos (+1 por el piloto)
+N_tramas = 20;
+Nofdm = 63; % Número de símbolos OFDM por trama
+SNR_vector = 0:20;
+for i=1:N_tramas
+    BER_DBPSK=zeros(N_tramas,length(SNR_vector));
+    BER_DQPSK=zeros(N_tramas,length(SNR_vector));
+    BER_D8PSK=zeros(N_tramas,length(SNR_vector));
+
+    [txbitsDBPSK,xDBPSK] = ModulacionOFDMScrambler(2, Nf, NFFT, Nofdm);
+    [txbitsDQPSK,xDQPSK] = ModulacionOFDMScrambler(4, Nf, NFFT, Nofdm);
+    [txbitsD8PSK,xD8PSK] = ModulacionOFDMScrambler(8, Nf, NFFT, Nofdm);
+    % Se añase ruido:    
+     BERDBPSK=CalcularErrorRuidoCanal(xDBPSK, Nf, NFFT, 2 ,Nofdm, txbitsDBPSK, SNR_vector, h);
+     BERDQPSK=CalcularErrorRuidoCanal(xDQPSK, Nf, NFFT, 4 ,Nofdm, txbitsDQPSK, SNR_vector, h);
+     BERD8PSK=CalcularErrorRuidoCanal(xD8PSK, Nf, NFFT, 8 ,Nofdm, txbitsD8PSK, SNR_vector, h);
+     BERDBPSKRuido(i,:) = BERDBPSK;
+     BERDQPSKRuido(i,:) = BERDQPSK;
+     BERD8PSKRuido(i,:) = BERD8PSK;
+end
+BERDBPSKRuido_avg = zeros(1,length(SNR_vector));
+BERDQPSKRuido_avg = zeros(1,length(SNR_vector));
+BERD8PSKRuido_avg = zeros(1,length(SNR_vector));
+
+for i=1:N_tramas
+      BERDBPSKRuido_avg = BERDBPSKRuido_avg + BERDBPSKRuido(i,:);
+      BERDQPSKRuido_avg = BERDQPSKRuido_avg + BERDQPSKRuido(i,:);
+      BERD8PSKRuido_avg = BERD8PSKRuido_avg + BERD8PSKRuido(i,:);
+end
+BERDBPSKRuido_avg = BERDBPSKRuido_avg./N_tramas;
+BERDQPSKRuido_avg = BERDQPSKRuido_avg./N_tramas;
+BERD8PSKRuido_avg = BERD8PSKRuido_avg./N_tramas;
+
+theoryBerDBPSK = DBPSK_BER(SNR_vector);
+theoryBerDQPSK = DQPSK_BER(SNR_vector);
+theoryBerD8PSK = D8PSK_BER(SNR_vector);
+
+theoryBerDBPSK(find(theoryBerDBPSK<1e-5)) = NaN;
+theoryBerDQPSK(find(theoryBerDQPSK<1e-5)) = NaN;
+theoryBerD8PSK(find(theoryBerD8PSK<1e-5)) = NaN;
+
+figure
+
+semilogy(SNR_vector, BERDBPSKRuido_avg, '-o');  hold on
+semilogy(SNR_vector, theoryBerDBPSK,     '-kx');  
+semilogy(SNR_vector, BERDQPSKRuido_avg, '-o');  
+semilogy(SNR_vector, theoryBerDQPSK,     '-kx');  
+semilogy(SNR_vector, BERD8PSKRuido_avg, '-o'); 
+semilogy(SNR_vector, theoryBerD8PSK,     '-kx'); 
+
+legend('Simulado DBPSK','Teórico DBPSK', 'Simulado DQPSK', 'Teorico DQPSK', 'Simulado D8PSK', 'Teorico D8PSK')
+xlabel('SNR (dB)');  ylabel('BER de DMPSK')
+grid on
+title('Resultados del sistema OFDM de DBPSK DQPSK y D8PSK sin FEC con canal sin prefijo cíclico')
+title('BER vs SNR  sin FEC con canal sin prefijo cíclico ni ecualizador')
+%%
+% Como se podía esperar, cuando se introducen interferencias y retardos en
+% el canal, los errores aumentan. Es curioso que a partir de un umbral de
+% SNR, por mucho que se aumente el porcentaje de errores, se queda
+% estancado ahí.
+%%
+% Dependiendo del tipo de modulación, el umbral varía, para DQPSK, el
+% umbral se encuentra en aproximadamente 19 dB y el BER se estanca en
+% 0.03745 y no se consigue una BER menor a 0.9% a partir de ese umbral. Para DQPSK, ocurre lo mismo, se empieza a estancar el BER en 19 dB
+% con un BER de 0.01108 aproximadamente y no se consigue una BER menor a 2 % a partir de dicho umbral. Para D8PSK, ocurre lo mismo, se empieza a estancar el BER en 19 dB
+% con un BER de 0.007068 aproximadamente y no se consigue una BER menor a 5 % a partir de dicho umbral.
+%%
+% El valor de SNR coincide en todas las modulaciones, el error obtenido
+% varia debido a la separación entre símbolos de cada una.
+
+%% Apartado 2.4: Curvas BER vs SNR Teórica con canal, prefijo cíclico y ecualizador
+% En este introduciremos el prefijo cíclicoy, en el receptor, depués del
+% demodulador un ecualizador. Se empleará como piloto el primer símbolo
+% OFDM, se asumirá que el receptor conoce las amplitudes complejas de las
+% portadoras del primer símbolo OFDM antes de inyectar la señal en línea.
+% Con estos añadidos, se calculará y se representará las nuevas curvas de
+for i=1:N_tramas
+    BER_DBPSK=zeros(N_tramas,length(SNR_vector));
+    BER_DQPSK=zeros(N_tramas,length(SNR_vector));
+    BER_D8PSK=zeros(N_tramas,length(SNR_vector));
+
+    [txbitsDBPSK,xDBPSK, pilotoDBPSK] = ModulacionOFDMEcualizacion(2, Nf, NFFT, Nofdm);
+    [txbitsDQPSK,xDQPSK, pilotoDQPSK] = ModulacionOFDMEcualizacion(4, Nf, NFFT, Nofdm);
+    [txbitsD8PSK,xD8PSK, pilotoD8PSK] = ModulacionOFDMEcualizacion(8, Nf, NFFT, Nofdm);
+    % Demodulacion con Ecualizador Zero Forcing    
+     BERDBPSK_Ecualizador=CalcularErrorRuidoCanalEcualizado(xDBPSK, Nf, NFFT, 2 ,Nofdm, txbitsDBPSK, SNR_vector, h, pilotoDBPSK);
+     BERDQPSK_Ecualizador=CalcularErrorRuidoCanalEcualizado(xDQPSK, Nf, NFFT, 4 ,Nofdm, txbitsDQPSK, SNR_vector, h, pilotoDQPSK);
+     BERD8PSK_Ecualizador=CalcularErrorRuidoCanalEcualizado(xD8PSK, Nf, NFFT, 8 ,Nofdm, txbitsD8PSK, SNR_vector, h, pilotoD8PSK);
+     BERDBPSKRuido_Ecualizador(i,:) = BERDBPSK_Ecualizador;
+     BERDQPSKRuido_Ecualizador(i,:) = BERDQPSK_Ecualizador;
+     BERD8PSKRuido_Ecualizador(i,:) = BERD8PSK_Ecualizador;
+end
+BERDBPSKRuido_avg_Ecualizador = zeros(1,length(SNR_vector));
+BERDQPSKRuido_avg_Ecualizador = zeros(1,length(SNR_vector));
+BERD8PSKRuido_avg_Ecualizador = zeros(1,length(SNR_vector));
+
+for i=1:N_tramas
+      BERDBPSKRuido_avg_Ecualizador = BERDBPSKRuido_avg_Ecualizador + BERDBPSKRuido_Ecualizador(i,:);
+      BERDQPSKRuido_avg_Ecualizador = BERDQPSKRuido_avg_Ecualizador + BERDQPSKRuido_Ecualizador(i,:);
+      BERD8PSKRuido_avg_Ecualizador = BERD8PSKRuido_avg_Ecualizador + BERD8PSKRuido_Ecualizador(i,:);
+end
+BERDBPSKRuido_avg_Ecualizador = BERDBPSKRuido_avg_Ecualizador./N_tramas;
+BERDQPSKRuido_avg_Ecualizador = BERDQPSKRuido_avg_Ecualizador./N_tramas;
+BERD8PSKRuido_avg_Ecualizador = BERD8PSKRuido_avg_Ecualizador./N_tramas;
+figure
+
+semilogy(SNR_vector, BERDBPSKRuido_avg, '-*');  hold on
+semilogy(SNR_vector, BERDBPSKRuido_avg_Ecualizador, '-o');  
+semilogy(SNR_vector, BERDQPSKRuido_avg, '-*');  
+semilogy(SNR_vector, BERDQPSKRuido_avg_Ecualizador, '-o');  
+semilogy(SNR_vector, BERD8PSKRuido_avg, '-*'); 
+semilogy(SNR_vector, BERD8PSKRuido_avg_Ecualizador, '-o'); 
+
+legend('Simulado DBPSK Sin Ecualizador','Simulado DBPSK Con Ecualizador', 'Simulado DQPSK Sin Ecualizador', 'Simulado DQPSK Con Ecualizador', 'Simulado D8PSK Sin Ecualizador', 'Simulado D8PSK Con Ecualizador')
+xlabel('SNR (dB)');  ylabel('BER de DMPSK')
+grid on
+title('BER vs SNR  sin FEC con canal con prefijo cíclico y con ecualizador')
+figure
+
+semilogy(SNR_vector, BERDBPSKRuido_avg_Ecualizador, '-o');  hold on
+semilogy(SNR_vector, theoryBerDBPSK);  
+semilogy(SNR_vector, BERDQPSKRuido_avg_Ecualizador, '-o');  
+semilogy(SNR_vector, theoryBerDQPSK);  
+semilogy(SNR_vector, BERD8PSKRuido_avg_Ecualizador, '-o'); 
+semilogy(SNR_vector, theoryBerD8PSK); 
+
+legend('Simulado DBPSK','Teórico DBPSK', 'Simulado DQPSK', 'Teorico DQPSK', 'Simulado D8PSK', 'Teorico D8PSK')
+xlabel('SNR (dB)');  ylabel('BER de DMPSK')
+grid on
+title('BER vs SNR  sin FEC con canal con prefijo cíclico y con ecualizador')
+
+
+%%
+% Se muestra el resultado de introducir el ecualizador en recepción. Se
+% muestran dos figuras, una figura muestra las curvas de error BER en función de la SNR de las señales recibidas con y sin ecualizador. La siguiente figura, muestra las curvas creadas con ecualizador junto
+% con las teóricas sin distorsión de canal. Se observa en las figuras, como
+% el error de fondo que limitaba todas las señales con un BER muy grande,
+% el ecualizador lo soluciona. Se observa que tal y como se esperaba la
+% curva teórica es parecida a la de con ecualizador, pero las curvas se
+% desplezan un poco a la derecha. Esto se debe a que el ecualizador es
+% Zero-Forcing y como vimos hace que se aumente el SNR y por tanto los
+% errores. Para DBPSK, encontramos que para un BER de 10^-4 hay una diferencia de SNR de 7 dB con respecto a la teórica. Para DQPSK, con un BER de 10^-4 hay una direncia aproximada de unos 6 dB. Por último, para un BER de 10^-4, tenemos una diferenca de SNR de casi 8 dB. 
+clear all;
+%% Apartado 3: Implementación de todos los modos de comunicación de PRIME con FEC 
+% Partiendo del sistema ya definido con su código para la obtención de
+% curvas de BER frente a SNR, incluyendo canal real, incluir las técnicas de corrección de errores, FEC, definidas en el estándar.
+% Para implementar FEC es necesario modificar los valores de algunos parámetros de simulación. Se debe justificar la modificación, teniendo en cuenta que las tramas payload deben construirse de acuerdo al estándar PRIME, que se establece una diferencia entre bits de información, o antes de codificar, y bits codificados, la existencia de bits de vaciado (flushing), etc.
+%% Apartado 3.1:  Modificación de parámetros.
+%%
+% Cuando aplicamos FEC, se sabe que el codificador es el standard usado por
+% PRIME según se especifica en dicho standard. Se duplican los bits de
+% entrada y por tanto los paquetes necesarios para enviar la cadena. El
+% codificador que usa PRIME, usa 7 registros que para para la entrada de
+% cada paquete se deben reiniciar a cero. Para reiniciar los registros a
+% cero, se añaden 8 bits de valor 0 al inicio de la cadena, estos bits se
+% conocen como flushing. 
+%% 
+% Para poder computar la variación de paquetes transmitidos con FEC, se han
+% creado dos funciones para calcularlo, se muestran los paquetes necesarios
+% para enviar una cadena de 80000 bits en todos los formatos de modulación
+% aceptados por prime con y sin FEC. Se puede ver que no en todos los caso
+% con FEC es el doble exactamente de paquetes a sin FEC, ya que el número
+% de bits no es redondo para rellenar todos paquetes, por lo que el último
+% paquete se rellena con ceros al final. Se puede ver también como aumentan
+% los paquetes enviados enviados a casi el doble con FEC que sin FEC.
+clear; close all, format compact
+Nf    =	96;  % Numero de portadoras con datos (+1 por el piloto)
+Nofdm = 63; % Número de símbolos OFDM por trama
+numPaquetesDBPSKFEC = calcularNumeroPaquetesFEC(80000, 2, Nofdm, Nf)
+numPaquetesDBPSKnoFEC = calcularNumeroPaquetesnoFEC(80000, 2, Nofdm, Nf)
+
+numPaquetesDQPSKFEC = calcularNumeroPaquetesFEC(80000, 4, Nofdm, Nf)
+numPaquetesDQPSKnoFEC = calcularNumeroPaquetesnoFEC(80000, 4, Nofdm, Nf)
+
+numPaquetesD8PSKFEC = calcularNumeroPaquetesFEC(80000, 8, Nofdm, Nf)
+numPaquetesD8PSKnoFEC = calcularNumeroPaquetesnoFEC(80000, 8, Nofdm, Nf)
+%% Apartado 3.2.1: Cadena con entrelazado en ausencia de ruido.
+NFFT  =	512;  % Tamaño de la FFT
+Fs    =	 250000;  % Frecuencia de muestreo
+df    =  Fs/NFFT ;  % Separación entre portadoras
+Nf    =	96;  % Numero de portadoras con datos (+1 por el piloto)
+N_tramas = 20;
+Nofdm = 63; % Número de símbolos OFDM por trama
+SNR_vector = 0:20;
+
+BERDBPSK_Entrelazado_Total = [];
+BERDQPSK_Entrelazado_Total = [];
+BERD8PSK_Entrelazado_Total = [];
+BERDBPSK_FEC_Total = [];
+BERDQPSK_FEC_Total = [];
+BERD8PSK_FEC_Total = [];
+
+BER_DBPSK_conFEC=zeros(N_tramas,length(SNR_vector));
+BER_DQPSK_conFEC=zeros(N_tramas,length(SNR_vector));
+BER_D8PSK_conFEC=zeros(N_tramas,length(SNR_vector));
+
+BER_DBPSK_sinFEC=zeros(N_tramas,length(SNR_vector));
+BER_DQPSK_sinFEC=zeros(N_tramas,length(SNR_vector));
+BER_D8PSK_sinFEC=zeros(N_tramas,length(SNR_vector));
+for iter=1:N_tramas
+    [txbitsDBPSK,xDBPSK] = ModulacionInterleaver(2, Nf, NFFT, Nofdm);
+    [txbitsDQPSK,xDQPSK] = ModulacionInterleaver(4, Nf, NFFT, Nofdm);
+    [txbitsD8PSK,xD8PSK] = ModulacionInterleaver(8, Nf, NFFT, Nofdm);
+    % Demodulacion con Interleaver
+    h=[-0.1,0.3,-0.5,0.7,-0.9,0.7,-0.5,0.3,-0.1];
+    BERDBPSK_Entrelazado=CalcularErrorInterleaver(xDBPSK, Nf, NFFT, 2 ,Nofdm, txbitsDBPSK);
+    BERDQPSK_Entrelazado=CalcularErrorInterleaver(xDQPSK, Nf, NFFT, 4 ,Nofdm, txbitsDQPSK);
+    BERD8PSK_Entrelazado=CalcularErrorInterleaver(xD8PSK, Nf, NFFT, 8 ,Nofdm, txbitsD8PSK);
+    BERDBPSK_Entrelazado_Total = [BERDBPSK_Entrelazado_Total BERDBPSK_Entrelazado];
+    BERDQPSK_Entrelazado_Total = [BERDQPSK_Entrelazado_Total BERDQPSK_Entrelazado];
+    BERD8PSK_Entrelazado_Total = [BERD8PSK_Entrelazado_Total BERD8PSK_Entrelazado];    
+% No hay errores al añadir el entrelazado
+end
+BERDBPSK_Entrelazado_Total = sum(BERDBPSK_Entrelazado_Total)
+BERDQPSK_Entrelazado_Total = sum(BERDQPSK_Entrelazado_Total)
+BERD8PSK_Entrelazado_Total = sum(BERD8PSK_Entrelazado_Total)
+
+%% 
+% Tal y como se esperaba, en ausencia de ruido y unicamente añadiendo el
+% entrelazado y desentrelazado, no se producen errores y por tanto, al
+% igual que el apartado 1, podemos decir que se ha añadido correctamente
+% los bloques de entrelazado y desentralazado.
+%% Apartado 3.2.2: Cadena con entrelazado y FEC en ausencia de ruido.
+%Añadimos la codificación
+h=[-0.1,0.3,-0.5,0.7,-0.9,0.7,-0.5,0.3,-0.1];
+NFFT  =	512;  % Tamaño de la FFT
+Fs    =	 250000;  % Frecuencia de muestreo
+df    =  Fs/NFFT ;  % Separación entre portadoras
+Nf    =	96;  % Numero de portadoras con datos (+1 por el piloto)
+N_tramas = 20;
+Nofdm = 63; % Número de símbolos OFDM por trama
+SNR_vector = 0:20;
+for i=1:N_tramas
+    lg = 7;
+    enrejado = poly2trellis([lg],[171,133]);
+    [txbitsDBPSK,xDBPSK] = ModulacionConvolutionalEncoder(2, Nf, NFFT, Nofdm, enrejado);
+    [txbitsDQPSK,xDQPSK] = ModulacionConvolutionalEncoder(4, Nf, NFFT, Nofdm, enrejado);
+    [txbitsD8PSK,xD8PSK] = ModulacionConvolutionalEncoder(8, Nf, NFFT, Nofdm, enrejado);
+    % Demodulacion con Convolutional Encoder
+    BERDBPSK_FEC=CalcularErrorConvolutionalEncoder(xDBPSK, Nf, NFFT, 2 ,Nofdm, txbitsDBPSK, enrejado);
+    BERDQPSK_FEC=CalcularErrorConvolutionalEncoder(xDQPSK, Nf, NFFT, 4 ,Nofdm, txbitsDQPSK, enrejado);
+    BERD8PSK_FEC=CalcularErrorConvolutionalEncoder(xD8PSK, Nf, NFFT, 8 ,Nofdm, txbitsD8PSK, enrejado);
+    BERDBPSK_FEC_Total = [BERDBPSK_FEC_Total BERDBPSK_FEC];
+    BERDQPSK_FEC_Total = [BERDQPSK_FEC_Total BERDQPSK_FEC];
+    BERD8PSK_FEC_Total = [BERD8PSK_FEC_Total BERD8PSK_FEC];
+end
+BERDBPSK_FEC_Total = sum(BERDBPSK_FEC_Total)
+BERDQPSK_FEC_Total = sum(BERDQPSK_FEC_Total)
+BERD8PSK_FEC_Total = sum(BERD8PSK_FEC_Total)
+
+%% 
+% Tal y como se esperaba, en ausencia de ruido y unicamente añadiendo el
+% entrelazado y desentrelazado, no se producen errores y por tanto, al
+% igual que el apartado 1, podemos decir que se ha añadido correctamente
+% los bloques de entrelazado y desentralazado y de convolutional encoder.
+%% Apartado 3.2.3: Curvas BER vs SNR
+% Primero representaremos las curvas de BER vs SNR sin FEC y sin canal frente a las propias curvas con FEC sin canal:
+for i=1:N_tramas
+    BER_DBPSK=zeros(N_tramas,length(SNR_vector));
+    BER_DQPSK=zeros(N_tramas,length(SNR_vector));
+    BER_D8PSK=zeros(N_tramas,length(SNR_vector));
+    BER_DBPSK_FEC=zeros(N_tramas,length(SNR_vector));
+    BER_DQPSK_FEC=zeros(N_tramas,length(SNR_vector));
+    BER_D8PSK_FEC=zeros(N_tramas,length(SNR_vector));
+
+    [txbitsDBPSK,xDBPSK] = ModulacionOFDMScrambler(2, Nf, NFFT, Nofdm);
+    [txbitsDQPSK,xDQPSK] = ModulacionOFDMScrambler(4, Nf, NFFT, Nofdm);
+    [txbitsD8PSK,xD8PSK] = ModulacionOFDMScrambler(8, Nf, NFFT, Nofdm);
+    
+    % Se añase ruido:    
+    BERDBPSK=CalcularErrorRuido(xDBPSK, Nf, NFFT, 2 ,Nofdm, txbitsDBPSK, SNR_vector);
+    BERDQPSK=CalcularErrorRuido(xDQPSK, Nf, NFFT, 4 ,Nofdm, txbitsDQPSK, SNR_vector);
+    BERD8PSK=CalcularErrorRuido(xD8PSK, Nf, NFFT, 8 ,Nofdm, txbitsD8PSK, SNR_vector);
+    BERDBPSKRuido(i,:) = BERDBPSK;
+    BERDQPSKRuido(i,:) = BERDQPSK;
+    BERD8PSKRuido(i,:) = BERD8PSK;
+    
+    % Ahora con FEC:
+    lg = 7;
+    enrejado = poly2trellis([lg],[171,133]);
+    [txbitsDBPSK_FEC,xDBPSK_FEC] = ModulacionConvolutionalEncoder(2, Nf, NFFT, Nofdm, enrejado);
+    [txbitsDQPSK_FEC,xDQPSK_FEC] = ModulacionConvolutionalEncoder(4, Nf, NFFT, Nofdm, enrejado);
+    [txbitsD8PSK_FEC,xD8PSK_FEC] = ModulacionConvolutionalEncoder(8, Nf, NFFT, Nofdm, enrejado);
+    BERDBPSK_FEC=CalcularErrorConvolutionalEncoderRuido(xDBPSK_FEC, Nf, NFFT, 2 ,Nofdm, txbitsDBPSK_FEC, enrejado, SNR_vector);
+    BERDQPSK_FEC=CalcularErrorConvolutionalEncoderRuido(xDQPSK_FEC, Nf, NFFT, 4 ,Nofdm, txbitsDQPSK_FEC, enrejado, SNR_vector);
+    BERD8PSK_FEC=CalcularErrorConvolutionalEncoderRuido(xD8PSK_FEC, Nf, NFFT, 8 ,Nofdm, txbitsD8PSK_FEC, enrejado, SNR_vector);    
+    BERDBPSKRuido_FEC(i,:) = BERDBPSK_FEC;
+    BERDQPSKRuido_FEC(i,:) = BERDQPSK_FEC;
+    BERD8PSKRuido_FEC(i,:) = BERD8PSK_FEC;    
+end  
+BERDBPSKRuido_avg = zeros(1,length(SNR_vector));
+BERDQPSKRuido_avg = zeros(1,length(SNR_vector));
+BERD8PSKRuido_avg = zeros(1,length(SNR_vector));
+BERDBPSKRuido_avg_FEC = zeros(1,length(SNR_vector));
+BERDQPSKRuido_avg_FEC = zeros(1,length(SNR_vector));
+BERD8PSKRuido_avg_FEC = zeros(1,length(SNR_vector));
+for i=1:N_tramas
+      BERDBPSKRuido_avg = BERDBPSKRuido_avg + BERDBPSKRuido(i,:);
+      BERDQPSKRuido_avg = BERDQPSKRuido_avg + BERDQPSKRuido(i,:);
+      BERD8PSKRuido_avg = BERD8PSKRuido_avg + BERD8PSKRuido(i,:);
+      BERDBPSKRuido_avg_FEC = BERDBPSKRuido_avg_FEC + BERDBPSKRuido_FEC(i,:);
+      BERDQPSKRuido_avg_FEC = BERDQPSKRuido_avg_FEC + BERDQPSKRuido_FEC(i,:);
+      BERD8PSKRuido_avg_FEC = BERD8PSKRuido_avg_FEC + BERD8PSKRuido_FEC(i,:);
+end
+BERDBPSKRuido_avg = BERDBPSKRuido_avg./N_tramas;
+BERDQPSKRuido_avg = BERDQPSKRuido_avg./N_tramas;
+BERD8PSKRuido_avg = BERD8PSKRuido_avg./N_tramas;
+
+BERDBPSKRuido_avg_FEC = BERDBPSKRuido_avg_FEC./N_tramas;
+BERDQPSKRuido_avg_FEC = BERDQPSKRuido_avg_FEC./N_tramas;
+BERD8PSKRuido_avg_FEC = BERD8PSKRuido_avg_FEC./N_tramas;
+figure
+semilogy(SNR_vector, BERDBPSKRuido_avg, '-o');  hold on
+semilogy(SNR_vector, BERDBPSKRuido_avg_FEC,     '-x');  
+semilogy(SNR_vector, BERDQPSKRuido_avg, '-o');  
+semilogy(SNR_vector, BERDQPSKRuido_avg_FEC,     '-x');  
+semilogy(SNR_vector, BERD8PSKRuido_avg, '-o'); 
+semilogy(SNR_vector, BERD8PSKRuido_avg_FEC,     '-x'); 
+
+legend('DBPSK sin FEC','DBPSK con FEC', 'DQPSK sin FEC', 'DQPSK con FEC', 'D8PSK sin FEC', 'D8PSK con FEC')
+xlabel('SNR (dB)');  ylabel('BER de DMPSK')
+grid on
+title('Resultados del sistema OFDM sin FEC vs con FEC')
+%%
+% Se muestra una representación de BER vs SNR con y sin FEC cuando no se
+% añade el canal, ni prefijo cíclico, ni ecualización. Como se puede
+% apreciar, el rendimiento es peor cuando se introduce FEC que cuando se
+% introduce FEC, esto se puede deber a que la codicodificación de un bit
+% está influenciada por las anteriores, por lo que el error se arrastra.
+% Para condiciones con SNR mayor a un cierto umbral, el SNR necesario para
+% un BER disminuye rápidamente. El umbral para cada modulación es: a partir
+% de 2dB para DBPSK, a partir de 4 dB para DQPSK y a partir de 8 dB para
+% D8PSK.
+%%
+% Podemos decir que con FEC se mandan más bits para un número fijo de bits
+% de información, estos bits permiten corregir errores al decodificar, por
+% lo que necesita menor SNR y la potencia para transmitir información va a
+% ser mayor. Por otro lado, se reduce la velocidad de transmisión y se
+% aumenta considerablemente la complejidad.
+%% Canal con ecualización:
+h=[-0.1,0.3,-0.5,0.7,-0.9,0.7,-0.5,0.3,-0.1];
+for i=1:N_tramas
+    BER_DBPSK=zeros(N_tramas,length(SNR_vector));
+    BER_DQPSK=zeros(N_tramas,length(SNR_vector));
+    BER_D8PSK=zeros(N_tramas,length(SNR_vector));
+
+    [txbitsDBPSK,xDBPSK, pilotoDBPSK] = ModulacionOFDMEcualizacion(2, Nf, NFFT, Nofdm);
+    [txbitsDQPSK,xDQPSK, pilotoDQPSK] = ModulacionOFDMEcualizacion(4, Nf, NFFT, Nofdm);
+    [txbitsD8PSK,xD8PSK, pilotoD8PSK] = ModulacionOFDMEcualizacion(8, Nf, NFFT, Nofdm);
+    % Demodulacion con Ecualizador Zero Forcing    
+     BERDBPSK_Ecualizador=CalcularErrorRuidoCanalEcualizado(xDBPSK, Nf, NFFT, 2 ,Nofdm, txbitsDBPSK, SNR_vector, h, pilotoDBPSK);
+     BERDQPSK_Ecualizador=CalcularErrorRuidoCanalEcualizado(xDQPSK, Nf, NFFT, 4 ,Nofdm, txbitsDQPSK, SNR_vector, h, pilotoDQPSK);
+     BERD8PSK_Ecualizador=CalcularErrorRuidoCanalEcualizado(xD8PSK, Nf, NFFT, 8 ,Nofdm, txbitsD8PSK, SNR_vector, h, pilotoD8PSK);
+     BERDBPSKRuido_Ecualizador(i,:) = BERDBPSK_Ecualizador;
+     BERDQPSKRuido_Ecualizador(i,:) = BERDQPSK_Ecualizador;
+     BERD8PSKRuido_Ecualizador(i,:) = BERD8PSK_Ecualizador;
+end
+BERDBPSKRuido_avg_Ecualizador = zeros(1,length(SNR_vector));
+BERDQPSKRuido_avg_Ecualizador = zeros(1,length(SNR_vector));
+BERD8PSKRuido_avg_Ecualizador = zeros(1,length(SNR_vector));
+
+for i=1:N_tramas
+      BERDBPSKRuido_avg_Ecualizador = BERDBPSKRuido_avg_Ecualizador + BERDBPSKRuido_Ecualizador(i,:);
+      BERDQPSKRuido_avg_Ecualizador = BERDQPSKRuido_avg_Ecualizador + BERDQPSKRuido_Ecualizador(i,:);
+      BERD8PSKRuido_avg_Ecualizador = BERD8PSKRuido_avg_Ecualizador + BERD8PSKRuido_Ecualizador(i,:);
+end
+BERDBPSKRuido_avg_Ecualizador = BERDBPSKRuido_avg_Ecualizador./N_tramas;
+BERDQPSKRuido_avg_Ecualizador = BERDQPSKRuido_avg_Ecualizador./N_tramas;
+BERD8PSKRuido_avg_Ecualizador = BERD8PSKRuido_avg_Ecualizador./N_tramas;
+for i=1:N_tramas
+    BER_DBPSK_FEC=zeros(N_tramas,length(SNR_vector));
+    BER_DQPSK_FEC=zeros(N_tramas,length(SNR_vector));
+    BER_D8PSK_FEC=zeros(N_tramas,length(SNR_vector));
+
+    lg = 7;
+    enrejado = poly2trellis([lg],[171,133]);
+    [txbitsDBPSK_FEC,xDBPSK_FEC,piloto_ecualizadorDBPSK] = ModulacionConvolutionalEncoderPC(2, Nf, NFFT, Nofdm, enrejado);
+    [txbitsDQPSK_FEC,xDQPSK_FEC,piloto_ecualizadorDQPSK] = ModulacionConvolutionalEncoderPC(4, Nf, NFFT, Nofdm, enrejado);
+    [txbitsD8PSK_FEC,xD8PSK_FEC,piloto_ecualizadorD8PSK] = ModulacionConvolutionalEncoderPC(8, Nf, NFFT, Nofdm, enrejado);
+    BERDBPSK_FEC=CalcularErrorConvolutionalEncoderRuidoCanal(xDBPSK_FEC, Nf, NFFT, 2 ,Nofdm, txbitsDBPSK_FEC, enrejado, SNR_vector, h, piloto_ecualizadorDBPSK);
+    BERDQPSK_FEC=CalcularErrorConvolutionalEncoderRuidoCanal(xDQPSK_FEC, Nf, NFFT, 4 ,Nofdm, txbitsDQPSK_FEC, enrejado, SNR_vector, h, piloto_ecualizadorDQPSK);
+    BERD8PSK_FEC=CalcularErrorConvolutionalEncoderRuidoCanal(xD8PSK_FEC, Nf, NFFT, 8 ,Nofdm, txbitsD8PSK_FEC, enrejado, SNR_vector, h, piloto_ecualizadorD8PSK);    
+    BERDBPSKRuido_FEC(i,:) = BERDBPSK_FEC;
+    BERDQPSKRuido_FEC(i,:) = BERDQPSK_FEC;
+    BERD8PSKRuido_FEC(i,:) = BERD8PSK_FEC; 
+end
+BERDBPSKRuido_avg_FEC = zeros(1,length(SNR_vector));
+BERDQPSKRuido_avg_FEC = zeros(1,length(SNR_vector));
+BERD8PSKRuido_avg_FEC = zeros(1,length(SNR_vector));
+for i=1:N_tramas
+      BERDBPSKRuido_avg_FEC = BERDBPSKRuido_avg_FEC + BERDBPSKRuido_FEC(i,:);
+      BERDQPSKRuido_avg_FEC = BERDQPSKRuido_avg_FEC + BERDQPSKRuido_FEC(i,:);
+      BERD8PSKRuido_avg_FEC = BERD8PSKRuido_avg_FEC + BERD8PSKRuido_FEC(i,:);
+end
+BERDBPSKRuido_avg_FEC = BERDBPSKRuido_avg_FEC./N_tramas;
+BERDQPSKRuido_avg_FEC = BERDQPSKRuido_avg_FEC./N_tramas;
+BERD8PSKRuido_avg_FEC = BERD8PSKRuido_avg_FEC./N_tramas;
+
+figure
+
+semilogy(SNR_vector, BERDBPSKRuido_avg_FEC, '-*');  hold on
+semilogy(SNR_vector, BERDBPSKRuido_avg_Ecualizador, '-o');  
+semilogy(SNR_vector, BERDQPSKRuido_avg_FEC, '-*');  
+semilogy(SNR_vector, BERDQPSKRuido_avg_Ecualizador, '-o');  
+semilogy(SNR_vector, BERD8PSKRuido_avg_FEC, '-*'); 
+semilogy(SNR_vector, BERD8PSKRuido_avg_Ecualizador, '-o'); 
+
+legend('DBPSK Con FEC','DBPSK Sin FEC', 'DQPSK Con FEC', 'DQPSK Sin FEC', 'D8PSK Con FEC', 'D8PSK Sin FEC')
+xlabel('SNR (dB)');  ylabel('BER de DMPSK')
+grid on
+title('Resultados del sistema OFDM con FEC vs sin FEC con canal y ecualizador')
+%%
+% En este caso y como esperábamos, si comparamos las curvas con canal y
+% ecualización con FEC y sin FEC, se puede observar las curvas sin FEC
+% tienen mejor respuesta que las curvas sin FEC, los rendimientos ademas
+% cambian para cada modulación: Para DBPSK para un BER de 10^-4 hay una
+% diferencia de SNR de unos 5 dB, para DQPSK para una BER de 10^-3 hay una
+% diferencia de SNR de unos 6 dB (sin FEC se necesita más SNR para llegar a
+% 10^-4) para D8PSK para una BER de 10^-2, hay una diferencia de 9 dB (sin
+% FEC se necesita mucho más SNR para bajar el BER).
+##### SOURCE END #####
+--></body></html>
