@@ -14,7 +14,7 @@ function BER = CalcularErrorScrambler(signal, Nf, NFFT, M ,Nofdm, tx_bits)
     [Y,pilotos_angulos] = OFDM_Demodulador(signal,NFFT,Nofdm);
 % Demodulación DMPSK
     rx_bits_aleatorios = DMPSK_Demod(Y, M, pilotos_angulos);
-% Deatorización del vector con la llamada a la función Scrambler
+% Dealeatorización del vector con la llamada a la función Scrambler
     rx_bits = Scrambler(rx_bits_aleatorios(:)');
 % Cálculo de los errores comparando los transmitidos con los recibidos
     errores = sum(bitxor(tx_bits(:), rx_bits(:)));
