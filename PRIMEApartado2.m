@@ -6,14 +6,16 @@ clear all;
 %% Apartado 3.1: Señal inyectada
 
 %% Apartado 3.2: Representación gráfica del canal
-% Hay que cambiar a como nos piden en el enunciado que no lo entiendo bien.
+Fs    =	 25000;  % Frecuencia de muestreo
+NFFT = 512;
 h=[-0.1,0.3,-0.5,0.7,-0.9,0.7,-0.5,0.3,-0.1];
-H = fft(h,length(h));
+f = linspace(-Fs/2, Fs/2, NFFT);
+H = fft(h,NFFT);
 figure;
-plot(abs(fftshift(H)));
-title('Transformada de Fourier discreta de la respuesta del canal, H(k)')
-xlabel('k')
-ylabel('Amplitud o valor')
+plot(f, 20*log(abs(fftshift(H))));
+title('Transformada de Fourier discreta de la respuesta del canal h(n)')
+xlabel('f(Hz)')
+ylabel('Amplitud (dB)')
 %% 
 % El canal, como se puede apreciar actua como un filtro que atenua las
 % bandas laterales y amplifica las bandas de los extremos.
